@@ -1,0 +1,134 @@
+---
+import { db, Exchange, eq } from "astro:db";
+import Layout from "@/layouts/Layout.astro";
+import ReplaceIcon from "@/components/icons/ReplaceIcon.astro";
+import Close from "@/components/icons/Close.astro";
+import { getI18N } from "@/i18n/";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+// Genera las rutas estáticas para cada registro existente
+export async function getStaticPaths() {
+  const exchanges = await db.select().from(Exchange).all();
+  return exchanges.map((exchange) => ({ params: { id: String(exchange.id) } }));
+}
+
+// Obtiene el ID del parámetro de la ruta
+const { id } = Astro.params;
+
+// Recupera el registro de la base de datos según el ID
+const exchange = await db
+  .select()
+  .from(Exchange)
+  .where(eq(Exchange.id, Number(id)))
+  .get();
+
+// Si no se encuentra el registro, redirige a la página de administración
+if (!exchange) return Astro.redirect("/admin/admin/");
+
+// Procesamiento del formulario de edición
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const country = formData.get("country");
+  const currency = formData.get("currency");
+  const rate = Number(formData.get("rate"));
+  const symbol = formData.get("symbol");
+
+  if (!country || !currency || !rate || !symbol) {
+    return;
+  }
+
+  if (
+    typeof country === "string" &&
+    typeof currency === "string" &&
+    typeof rate === "number" &&
+    typeof symbol === "string"
+  ) {
+    await db
+      .update(Exchange)
+      .set({ country, currency, rate, symbol })
+      .where(eq(Exchange.id, Number(id)))
+      .run();
+    return Astro.redirect("/admin/admin/");
+  }
+}
+---
+
+<Layout title="Editar País" description="Editar un país existente">
+  <div class="flex justify-center items-center min-h-screen bg-gray-900">
+    <section
+      class="mx-auto w-full max-w-md p-4 mt-10 justify-center items-center bg-gray-700 text-white rounded-lg shadow-lg"
+    >
+      <div
+        class="relative mb-4 w-full flex justify-between items-center bg-gray-600 px-3 py-2 rounded-lg"
+      >
+        <h2 class="text-2xl font-semibold tracking-wider">
+          {i18n.ADMIN.TITLEEDIT}
+        </h2>
+        <a
+          href="/admin/admin/"
+          class="shadow-lg text-white hover:bg-red-500 transition ease-in-out duration-300 rounded-full p-1"
+        >
+          <Close class="w-4 h-4" />
+        </a>
+      </div>
+      <form method="post" class="flex flex-col gap-4">
+        <div>
+          <label for="country">{i18n.ADMIN.HEADER.COUNTRY}</label>
+          <input
+            type="text"
+            name="country"
+            id="country"
+            value={exchange.country}
+            class="border p-2 rounded w-full"
+            required
+          />
+        </div>
+        <div>
+          <label for="currency">{i18n.ADMIN.HEADER.CURRENCY}</label>
+          <input
+            type="text"
+            name="currency"
+            id="currency"
+            value={exchange.currency}
+            class="border p-2 rounded w-full"
+            required
+          />
+        </div>
+        <div>
+          <label for="rate">{i18n.ADMIN.HEADER.RATE}</label>
+          <input
+            type="number"
+            name="rate"
+            step="0.0001"
+            min="0"
+            max="10000"
+            id="rate"
+            value={exchange.rate}
+            class="border p-2 rounded w-full"
+            required
+          />
+        </div>
+        <div>
+          <label for="symbol">{i18n.ADMIN.HEADER.SYMBOL}</label>
+          <input
+            type="text"
+            name="symbol"
+            id="symbol"
+            value={exchange.symbol}
+            class="border p-2 rounded w-full"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded flex gap-3 justify-center"
+        >
+          <ReplaceIcon class="w-5 h-5 inline-block" />
+          {i18n.ADMIN.BUTTONEDIT}
+        </button>
+      </form>
+    </section>
+  </div>
+</Layout>

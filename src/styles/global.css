@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --font-great: "Great Vibes", cursive;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --breakpoint-3xl: 120rem;
+  --color-avocado-100: oklch(0.99 0 0);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+  --color-avocado-300: oklch(0.94 0.11 115.03);
+  --color-avocado-400: oklch(0.92 0.19 114.08);
+  --color-avocado-500: oklch(0.84 0.18 117.33);
+  --color-avocado-600: oklch(0.53 0.12 118.34);
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  /* ... */
+}
+
+ :root {
+    color-scheme: dark;
+    --entry-animation: -20px;
+    --cover-animation: 20px;
+  }
+
+  @media (min-width: 1400px) {
+    :root {
+      --entry-animation: -100px;
+      --cover-animation: 100px;
+    }
+  }
+
+  html {
+    font-family: "Montserrat", "Tomaso", system-ui, sans-serif;
+    background: #13151a;
+    scroll-behavior: auto;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+    /* margin-bottom: 1em; */
+    font-weight: 100;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+  }
+
+  p strong {
+    color: white;
+    font-weight: 700;
+  }
+
+  .text__glowing {
+    transition: text-shadow 0.3s ease;
+  }
+
+  .text__glowing:hover {
+    text-shadow: 1px 1px 20px #fff;
+  }
+
+  #header-nav {
+    animation: blur linear both;
+    animation-timeline: scroll();
+    animation-range: 0 500px;
+  }
+
+  @keyframes blur {
+    to {
+      box-shadow:
+        0px 5px 50px -5px rgba(255, 255, 255, 0.205),
+        0px 0px 0 1px rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  .shadown {
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+  }
+
+  /* .cp-v { 
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 50% 100%, 0 85%)
+  } */

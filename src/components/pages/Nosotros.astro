@@ -1,0 +1,310 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroContainer from "../HeroContainer.astro";
+import Logo from "@/components/Logo.astro";
+import BentoItem from "@/components/BentoItem.astro";
+import Numeros from "@/components/Numeros.astro";
+import { getI18N } from "@/i18n/";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<Layout
+  title=`${i18n.SEO_TITLE_1} ${new Date().getFullYear()} ${i18n.SEO_TITLE_2}`
+  description={i18n.SEO_DESCRIPTION}
+>
+  <section class="relative">
+    <HeroContainer img="/Nosotros.webp">
+      <span class="shadown text-8xl font-great tracking-widest text-wrap">
+        {i18n.ABOUTUS.TITLE}
+      </span>
+    </HeroContainer>
+
+    <seccion
+      class="relative text-xl text-left max-w-[70ch] text-pretty mx-auto md:px-8 mt-24 grid gap-4"
+    >
+      <Logo logoSize="16" />
+
+      <h1
+        class="mx-auto mb-4 text-balance text-center font-semibold tracking-wide text-5xl"
+      >
+        {i18n.ABOUTUS.SUBTITLE}
+      </h1>
+      <p
+        set:html={i18n.ABOUTUS.CONTENT}
+        class="max-w-[800px] mx-auto text-balance text-center text-sm tracking-wide md:text-xl"
+      />
+    </seccion>
+
+    <section
+      class="w-full mx-auto gap-10 text-pretty px-6 text-left text-xl sm:px-20 flex flex-col md:flex-row items-center justify-between p-6 md:p-8 my-12"
+    >
+      <div id="theater-text" class="md:w-1/2 space-y-4">
+        <h1
+          class="mx-auto mb-10 text-balance text-left text-3xl lg:text-5xl font-semibold tracking-wide"
+        >
+          {i18n.ABOUTUS.MISSION}
+        </h1>
+        <p>{i18n.ABOUTUS.CONTENT_MISSION}</p>
+      </div>
+      <div id="theater" class="mt-6 md:mt-0 md:w-1/2">
+        <img
+          class="object-cover w-full h-full rounded-md"
+          height={500}
+          src="/nosotros/Mision.webp"
+          style={{
+            aspectRatio: "812/556",
+            objectFit: "cover",
+          }}
+          width={500}
+        />
+      </div>
+    </section>
+
+    <section
+      class="w-full mx-auto my-12 gap-10 text-pretty px-6 text-left text-xl sm:px-20 flex flex-col md:flex-row items-center justify-between p-6 md:p-8"
+    >
+      <div id="trophies" class="mt-6 md:mt-0 md:w-1/2">
+        <img
+          class="object-cover w-full h-full rounded-md"
+          height={556}
+          src="/nosotros/Vision.webp"
+          style={{
+            aspectRatio: "812/556",
+            objectFit: "cover",
+          }}
+          width={812}
+        />
+      </div>
+      <div id="trophies-text" class="md:w-1/2 space-y-4">
+        <h1
+          class="mx-auto mb-10 text-balance text-left text-3xl lg:text-5xl font-semibold tracking-wide"
+        >
+          {i18n.ABOUTUS.VISION}
+        </h1>
+        <p set:html={i18n.ABOUTUS.CONTENT_VISION} />
+      </div>
+    </section>
+
+    <section
+      class="text-xl text-left px-20 max-w-[70ch] text-pretty mx-auto my-4 mt-10"
+    >
+      <h1
+        class="text-3xl font-semibold text-center text-wrap mx-auto mb-5 tracking-wide"
+      >
+        {i18n.ABOUTUS.VALUES.TITLE}
+      </h1>
+
+      <p set:html={i18n.ABOUTUS.VALUES.CONTENT_TITLE} />
+    </section>
+
+    <section
+      class={`
+            w-full  
+            grid lg:grid-cols-10 auto-rows-[30rem] gap-4 
+            mx-auto p-6 md:p-12 lg:p-20
+        `}
+    >
+      <BentoItem
+        class="col-span-10 lg:col-span-4"
+        title={i18n.ABOUTUS.VALUES.TRUST}
+      >
+        <div
+          slot="image"
+          class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 w-full h-full bg-cover bg-center bg-no-repeat opacity-80 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+          data-src="/nosotros/Confianza2.webp"
+        >
+        </div>
+        <p
+          slot="content"
+          class="max-w-xl text-base md:text-lg mb-4"
+          set:html={i18n.ABOUTUS.VALUES.CONTENT_TRUST}
+        />
+      </BentoItem>
+
+      <BentoItem
+        class="col-span-10 lg:col-span-6"
+        title={i18n.ABOUTUS.VALUES.RESPONSIBILITY}
+      >
+        <div
+          slot="image"
+          class="background transition-scale absolute bottom-0 left-0 top-0
+                    -z-10 h-full w-full
+                    bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+          data-src="/nosotros/Responsabilidad2.webp"
+        >
+        </div>
+        <p
+          slot="content"
+          class="max-w-xl text-base md:text-lg mb-4"
+          set:html={i18n.ABOUTUS.VALUES.CONTENT_RESPONSIBILITY}
+        />
+      </BentoItem>
+
+      <BentoItem
+        class="col-span-10 lg:col-span-5"
+        title={i18n.ABOUTUS.VALUES.LEARNING}
+      >
+        <div
+          slot="image"
+          class="background transition-scale absolute bottom-0 left-0 top-0
+                    -z-10 h-full w-full
+                    bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+          data-src="/nosotros/Aprendizaje.webp"
+        >
+        </div>
+        <p
+          slot="content"
+          class="max-w-xl text-base md:text-lg mb-4"
+          set:html={i18n.ABOUTUS.VALUES.CONTENT_LEARNING}
+        />
+      </BentoItem>
+
+      <BentoItem
+        class="col-span-10 lg:col-span-5"
+        title={i18n.ABOUTUS.VALUES.TEAMWORK}
+      >
+        <div
+          slot="image"
+          class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 w-full h-full bg-cover bg-center bg-no-repeat opacity-80 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+          data-src="/nosotros/Trabajo.webp"
+        >
+        </div>
+        <p
+          slot="content"
+          class="max-w-xl text-base md:text-lg mb-4"
+          set:html={i18n.ABOUTUS.VALUES.CONTENT_TEAMWORK}
+        />
+      </BentoItem>
+
+      <BentoItem
+        class="col-span-10 lg:col-span-4"
+        title={i18n.ABOUTUS.VALUES.VOCATION}
+      >
+        <div
+          slot="image"
+          class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 w-full h-full bg-cover bg-center bg-no-repeat opacity-80 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+          data-src="/nosotros/Vocacion.webp"
+        >
+        </div>
+        <p
+          slot="content"
+          class="max-w-xl text-base md:text-lg mb-4"
+          set:html={i18n.ABOUTUS.VALUES.CONTENT_VOCATION}
+        />
+      </BentoItem>
+
+      <BentoItem
+        class="col-span-10 lg:col-span-6"
+        title={i18n.ABOUTUS.VALUES.INNOVATION}
+      >
+        <div
+          slot="image"
+          class="background transition-scale absolute bottom-0 left-0 top-0
+                    -z-10 h-full w-full
+                    bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+          data-src="/nosotros/Innovacion.webp"
+        >
+        </div>
+        <p
+          slot="content"
+          class="max-w-xl text-base md:text-lg mb-4"
+          set:html={i18n.ABOUTUS.VALUES.CONTENT_INNOVATION}
+        />
+      </BentoItem>
+    </section>
+
+    <section>
+      <Numeros />
+    </section>
+  </section>
+
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      const backgrounds = document.querySelectorAll(
+        ".background"
+      ) as NodeListOf<HTMLElement>;
+
+      if (window.IntersectionObserver == null) {
+        backgrounds.forEach((bkg) => {
+          bkg.style.backgroundImage = "url('" + bkg.dataset.src + "')";
+        });
+        return;
+      }
+
+      function handleIntersection(entries: IntersectionObserverEntry[]) {
+        entries.map((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement;
+            const { style, dataset } = target;
+            // Item has crossed our observation
+            // threshold - load src from data-src
+            style.backgroundImage = "url('" + dataset.src + "')";
+            // Job done for this item - no need to watch it!
+            observer.unobserve(entry.target);
+          }
+        });
+      }
+
+      const observer = new IntersectionObserver(handleIntersection, {
+        rootMargin: "100px",
+      });
+
+      backgrounds.forEach((bkg) => observer.observe(bkg));
+    });
+  </script>
+
+  <style>
+    #theater,
+    #trophies-text h1,
+    #trophies-text p {
+      animation: cover-animation linear both;
+      animation-timeline: view();
+    }
+    #theater-text h1,
+    #theater-text p,
+    #trophies {
+      animation: entry-animation linear both;
+      animation-timeline: view();
+    }
+    #theater {
+      animation-range: entry 10% cover 40%;
+    }
+    #theater-text h1 {
+      animation-range: entry 10% cover 30%;
+    }
+    #theater-text p {
+      animation-range: entry 10% cover 20%;
+    }
+    #trophies {
+      animation-range: entry 30% cover 50%;
+    }
+    #trophies-text h1 {
+      animation-range: entry 30% cover 40%;
+    }
+    #trophies-text p {
+      animation-range: entry 20% cover 30%;
+    }
+    @keyframes entry-animation {
+      0% {
+        opacity: 0;
+        translate: var(--entry-animation) 0;
+      }
+      100% {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+    @keyframes cover-animation {
+      0% {
+        opacity: 0;
+        translate: var(--cover-animation) 0;
+      }
+      100% {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+  </style>
+</Layout>

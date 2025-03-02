@@ -1,0 +1,60 @@
+---
+import CardItem from "./CardItem.astro";
+import Address from "./icons/Address.astro";
+import Clock from "./icons/Clock.astro";
+import Email from "./icons/Email.astro";
+import WhatsApp from "./icons/WhatsApp.astro";
+import { getI18N } from "@/i18n/"
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+<div>
+    <CardItem 
+        title={i18n.CONTACTUS.CARD.TITLE_1} 
+        body={i18n.CONTACTUS.CARD.BODY_1}
+    >
+        <div 
+            slot="icons" 
+        >
+            <a href="https://web.whatsapp.com/send?phone=584124998811" target="_blank">
+                <WhatsApp />
+            </a>
+        </div>
+    </CardItem>
+
+    <CardItem 
+        title={i18n.CONTACTUS.CARD.TITLE_2} 
+        body={i18n.CONTACTUS.CARD.BODY_2}
+        subbody={i18n.CONTACTUS.CARD.SUBBODY_2}
+    >
+        <div 
+            slot="icons" 
+        >
+            <Clock />
+        </div>
+    </CardItem>
+
+    <CardItem 
+        title={i18n.CONTACTUS.CARD.TITLE_3}
+        body={i18n.CONTACTUS.CARD.BODY_3}
+    >
+        <div 
+            slot="icons" 
+        >
+            <Email />
+        </div>
+    </CardItem>
+
+    <CardItem 
+        title={i18n.CONTACTUS.CARD.TITLE_4} 
+        body={i18n.CONTACTUS.CARD.BODY_4}
+        subbody={i18n.CONTACTUS.CARD.SUBBODY_4}
+    >
+        <div 
+            slot="icons" 
+        >
+            <Address />
+        </div>
+    </CardItem>
+</div>

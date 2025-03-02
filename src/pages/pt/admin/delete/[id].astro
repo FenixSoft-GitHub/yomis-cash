@@ -1,0 +1,73 @@
+---
+import { db, Exchange, eq } from "astro:db";
+import Layout from "@/layouts/Layout.astro";
+import DeleteIcon from "@/components/icons/DeleteIcon.astro";
+import CancelIcon from "@/components/icons/CancelIcon.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@/i18n/utils";
+import { getI18N } from "@/i18n/";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+export async function getStaticPaths() {
+  const exchanges = await db.select().from(Exchange).all();
+  return exchanges.map((exchange) => ({ params: { id: String(exchange.id) } }));
+}
+
+const { id } = Astro.params;
+const exchange = await db
+  .select()
+  .from(Exchange)
+  .where(eq(Exchange.id, Number(id)))
+  .get();
+
+if (!exchange) return Astro.redirect("/pt/admin");
+
+if (Astro.request.method === "POST") {
+  await db
+    .delete(Exchange)
+    .where(eq(Exchange.id, Number(id)))
+    .run();
+  return Astro.redirect("/pt/admin/admin/");
+}
+---
+
+<Layout title="Eliminar País" description="Eliminar un país existente">
+  <div class="flex justify-center items-center min-h-screen bg-gray-900">
+    <section
+      class="mx-auto w-full max-w-md p-6 grid gap-6 justify-center items-center bg-gray-700 text-white rounded-lg shadow-lg"
+    >
+      <h2 class="text-2xl font-semibold tracking-wider text-center">
+        {i18n.ADMIN.TITLEDELETE}
+      </h2>
+      <p>
+        {i18n.ADMIN.SUBTITLEDELETE}
+        {exchange.country}?
+      </p>
+      <form method="post" class="flex justify-center gap-12">
+        <button
+          type="submit"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md flex items-center gap-3"
+        >
+          <DeleteIcon class="w-5 h-5 inline-block" />
+          {i18n.ADMIN.BUTTONDELETE}
+        </button>
+        <a
+          href={translatePath("/admin/")}
+          class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md w-fit transition ease-in-out duration-300 flex justify-center items-center gap-3"
+        >
+          <CancelIcon class="w-5 h-5 inline-block" />
+          {i18n.ADMIN.BUTTONCANCEL}
+        </a>
+      </form>
+    </section>
+  </div>
+</Layout>

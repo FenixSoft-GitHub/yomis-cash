@@ -1,0 +1,223 @@
+---
+import WhatsApp from "./icons/WhatsApp.astro";
+import FaceBook from "./icons/FaceBook.astro";
+import Instagram from "./icons/Instagram.astro";
+import X from "./icons/X.astro";
+import Youtube from "./icons/Youtube.astro";
+import Logo from "@/components/Logo.astro";
+import Link from "@/components/Link.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@/i18n/utils";
+
+import { getI18N } from "@/i18n/";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<footer class="bg-black/40">
+  <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <div class="md:flex md:justify-between">
+      <div class="mb-6 md:mb-0">
+        <a
+          href={translatePath("/")}
+          class="-mt-24 flex items-center justify-center mb-4 duration-500 hover:scale-110"
+        >
+          <Logo logoSize="16" />
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-4">
+        <div>
+          <h2 class="mb-2 text-sm font-semibold uppercase">
+            {i18n.FOOTER.WEB_MAP.TITLE}
+          </h2>
+          <ul class="text-gray-500">
+            <li>
+              <a
+                href={translatePath("/")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.inicio")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/nosotros")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.nosotros")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/paises")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.paises")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/comofunciona")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.comofunciona")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/contacto")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.contacto")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/admin/admin")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.admin")}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="mb-2 text-sm font-semibold uppercase">
+            {i18n.FOOTER.LEGAL.TITLE}
+          </h2>
+          <ul class="text-gray-500 font-medium">
+            <li>
+              <a
+                href={translatePath("/")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.legal")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.privacidad")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.cookies")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/comofunciona#faq")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.preguntas")}
+              </a>
+            </li>
+            <li>
+              <a
+                href={translatePath("/enviar/0")}
+                class="hover:text-primary hover:underline hover:text-gray-100 duration-300 px-2 py-1 rounded-full"
+              >
+                {t("nav.enviar")}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-2 text-sm font-semibold uppercase">
+            {i18n.FOOTER.CONTACTUS}
+          </h2>
+          <ul class="text-gray-500 font-medium">
+            <li>
+              <a href="https://flowbite.com/">WhatsApp</a>
+            </li>
+            <li>
+              <a
+                class="flex items-center gap-2 hover:underline hover:text-gray-100"
+                href="https://web.whatsapp.com/send?phone=584124998811"
+                target="_blank"
+              >
+                <WhatsApp class="w-4" />
+                +58 412-488 6644
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="mb-6 text-sm font-semibold uppercase text-center">
+            {i18n.FOOTER.FOLLOWUS}
+          </h2>
+          <div class="flex mt-4 sm:justify-center sm:mt-0">
+            <a
+              href="#"
+              class="text-gray-500 bg-gray-500/30 rounded-full p-2 hover:text-gray-200 hover:transition ease-in-out duration-1000 hover:scale-110 hover:bg-[#3b5998] ms-3"
+            >
+              <FaceBook />
+              <span class="sr-only">Facebook</span>
+            </a>
+            <a
+              href="https://x.com/OrtizSis"
+              class="text-gray-500 bg-gray-500/30 rounded-full p-2 hover:text-gray-200 hover:scale-110 hover:transition ease-in-out duration-1000 hover:bg-[#00acee] ms-3"
+              target="_blank"
+            >
+              <X />
+              <span class="sr-only">X</span>
+            </a>
+            <a
+              href="#"
+              class="text-gray-500 bg-gray-500/30 rounded-full p-2 hover:text-gray-200 hover:transition ease-in-out duration-1000 hover:scale-110 hover:bg-[#c4302b] ms-3"
+            >
+              <Youtube />
+              <span class="sr-only">YouTube</span>
+            </a>
+            <a
+              href="https://www.instagram.com/yomis_garden/"
+              class="icon text-gray-500 bg-gray-500/30 rounded-full p-2 hover:text-gray-200 hover:scale-110 ms-3"
+              target="_blank"
+            >
+              <Instagram />
+              <span class="sr-only">Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-2 border-gray-500 sm:mx-auto lg:my-4" />
+    <div class="sm:flex sm:items-center sm:justify-between">
+      <span class="text-sm text-gray-400 sm:text-center">
+        &copy; &nbsp;{new Date().getFullYear()}&nbsp;
+        <a href="#" class="hover:underline"> Yomi's Cash™. ❤</a>
+        {i18n.FOOTER.DISCLAIMER}
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .icon:hover {
+    background: radial-gradient(
+      circle at 33% 100%,
+      #fed373 4%,
+      #f15245 30%,
+      #d92e7f 62%,
+      #9b36b7 85%,
+      #515ecf
+    );
+    transition: 1s ease-in-out;
+  }
+</style>

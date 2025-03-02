@@ -1,0 +1,59 @@
+---
+// import Logo from "./Logo.astro";
+import { getI18N } from "@/i18n/index";
+import Logo from "./Logo.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<section class="relative h-dvh w-full max-w-[100vw] md:h-[80vh] xl:h-full">
+  <div
+    class="absolute inset-0 h-full justify-center z-10 m-auto flex flex-col items-center w-full"
+  >
+    <section
+      class="absolute z-10 animate-fade-up flex justify-center items-center gap-2 flex-col"
+    >
+      <h1
+        class="subtitle flex items-center justify-center gap-2 md:text-8xl lg:gap-3 lg:text-9xl mb-10 font-great w-full"
+      >
+        <span>Y</span>
+        <span>o</span>
+        <span>m</span>
+        <span>i</span>
+        <span>'</span>
+        <span>s</span>
+        <Logo logoSize="36" />
+        <span>C</span>
+        <span>a</span>
+        <span>s</span>
+        <span>h</span>
+      </h1>
+
+      <span
+        class="subtitle text-white text-xl lg:text-xl text-center text-wrap uppercase px-4"
+      >
+        {i18n.SEO_TITLE_2}
+      </span>
+    </section>
+  </div>
+  <img
+    class="w-full h-screen object-fill object-top animate-fade-down animate-duration-[2s]"
+    src="/Inicio.webp"
+    alt="Inicio tropical"
+    style="mask-image: linear-gradient(black 80%, transparent)"
+  />
+  <img
+    class="w-full h-full absolute -bottom-44 blur-3xl -z-40"
+    src="/Inicio.webp"
+    alt="Inicio tropical"
+  />
+</section>
+
+<style>
+  .subtitle {
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+  }
+</style>
+
+

@@ -1,0 +1,45 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroContainer from "@/components/HeroContainer.astro";
+import Card from "@/components/Card.astro";
+import FormEmail from "@/components/FormEmail.astro";
+import { getI18N } from "@/i18n/";
+import Logo from "../Logo.astro";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<Layout title="Contacto" description="Contacto">
+  <HeroContainer img="/Contacto.webp">
+    <span class="shadown text-8xl tracking-widest text-wrap font-great">
+      {i18n.CONTACTUS.TITLE}
+    </span>
+  </HeroContainer>
+
+  <section class="mx-auto w-full max-w-[1400px] px-6 sm:p-20">
+    <div class="relative text-xl text-left max-w-[70ch] text-pretty mx-auto md:px-8 mt-24 grid gap-4">
+      <Logo logoSize="16" />
+      <h1
+        class="mx-auto mb-10 text-balance text-center text-xl font-semibold uppercase tracking-wide md:text-4xl"
+      >
+        {i18n.CONTACTUS.TITLE_1}
+      </h1>
+  
+      <p
+        set:html={i18n.CONTACTUS.CONTENT_1}
+        class="max-w-[800px] mx-auto mb-20 text-balance text-center text-sm tracking-wide md:text-xl"
+      />
+    </div>
+
+
+    <div class="lg:flex-row mx-auto w-full flex flex-col gap-14">
+      <div class="flex flex-col lg:w-1/2">
+        <Card />
+      </div>
+      <div class="mb-8">
+        <FormEmail />
+      </div>
+    </div>
+  </section>
+</Layout>

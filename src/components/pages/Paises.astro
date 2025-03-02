@@ -1,0 +1,126 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroContainer from "@/components/HeroContainer.astro";
+import PaisItem from "@/components/PaisItem.astro";
+import { getI18N } from "@/i18n/";
+import Logo from "../Logo.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<Layout title="Países" description="Países">
+  <HeroContainer img="/Paises.webp">
+    <span class="shadown text-8xl tracking-widest text-wrap font-great"
+      >{i18n.COUNTRY.TITLE}</span
+    >
+  </HeroContainer>
+
+  <main>
+    <section
+      id="trophies-text"
+      class="text-xl text-left px-20 max-w-[70ch] text-pretty mx-auto mt-24 grid gap-4"
+    >
+      <Logo logoSize="16" />
+      <h1
+        class="text-6xl font-great text-center text-wrap mx-auto mb-4 tracking-wide"
+      >
+        {i18n.COUNTRY.TITLE_2}
+      </h1>
+      <h2
+        class="text-2xl font-semibold text-center text-wrap mx-auto mb-4 tracking-wide"
+      >
+        {i18n.COUNTRY.SUBTITLE}
+      </h2>
+      <p
+        set:html={i18n.COUNTRY.CONTENT}
+        class="max-w-[800px] mx-auto mb-20 text-balance text-center text-sm tracking-wide md:text-xl"
+      />
+    </section>
+
+    <section
+      class="grid lg:justify-items-center place-items-center lg:grid-cols-2 grid-cols-1 gap-4 max-w-5xl mx-auto mt-20 mb-20"
+    >
+      <PaisItem
+        id="trophies"
+        href={translatePath(`/enviar/${0}`)}
+        imgSrc="/mapas/venezuela.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.VENEZUELA}`
+        ,
+        pais={i18n.COUNTRY.COUNTRYS.VENEZUELA}
+      />
+      <PaisItem
+        id="theater"
+        href={translatePath(`/enviar/${1}`)}
+        imgSrc="/mapas/ecuador.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.ECUADOR}`
+        pais={i18n.COUNTRY.COUNTRYS.ECUADOR}
+      />
+      <PaisItem
+        id="trophies"
+        href={translatePath(`/enviar/${2}`)}
+        imgSrc="/mapas/argentina.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.ARGENTINA}`
+        pais={i18n.COUNTRY.COUNTRYS.ARGENTINA}
+      />
+      <PaisItem
+        id="theater"
+        href={translatePath(`/enviar/${3}`)}
+        imgSrc="/mapas/chile.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.CHILE}`
+        pais={i18n.COUNTRY.COUNTRYS.CHILE}
+      />
+      <PaisItem
+        id="trophies"
+        href={translatePath(`/enviar/${4}`)}
+        imgSrc="/mapas/colombia.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.COLOMBIA}`
+        pais={i18n.COUNTRY.COUNTRYS.COLOMBIA}
+      />
+      <PaisItem
+        id="theater"
+        href={translatePath(`/enviar/${5}`)}
+        imgSrc="/mapas/peru.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.PERU}`
+        pais={i18n.COUNTRY.COUNTRYS.PERU}
+      />
+      <PaisItem
+        id="trophies"
+        href={translatePath(`/enviar/${6}`)}
+        imgSrc="/mapas/brazil.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.BRAZIL}`
+        pais={i18n.COUNTRY.COUNTRYS.BRAZIL}
+      />
+      <PaisItem
+        id="theater"
+        href={translatePath(`/enviar/${7}`)}
+        imgSrc="/mapas/mexico.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.MEXICO}`
+        pais={i18n.COUNTRY.COUNTRYS.MEXICO}
+      />
+      <PaisItem
+        id="trophies"
+        href={translatePath(`/enviar/${8}`)}
+        imgSrc="/mapas/america.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.USA}`
+        pais={i18n.COUNTRY.COUNTRYS.USA}
+      />
+      <PaisItem
+        id="theater"
+        href={translatePath(`/enviar/${9}`)}
+        imgSrc="/mapas/dominican.webp"
+        imgAlt=`Bandera de ${i18n.COUNTRY.COUNTRYS.DOMINICANA}`
+        pais={i18n.COUNTRY.COUNTRYS.DOMINICANA}
+      />
+    </section>
+  </main>
+</Layout>

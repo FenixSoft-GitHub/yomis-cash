@@ -1,0 +1,266 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroContainer from "@/components/HeroContainer.astro";
+import { getI18N } from "@/i18n/index";
+import Logo from "@/components/Logo.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+interface Props {
+  pais: {
+    nombre: string;
+    bandera: string;
+    banco: { nombre: string; logo: string }[];
+  };
+}
+
+const { pais } = Astro.props;
+---
+
+<Layout title="Enviar Dinero" description="Enviar Dinero">
+  <HeroContainer img="/ComoEnviar.webp">
+    <span class="shadown text-8xl font-great tracking-widest text-wrap">
+      {i18n.DATASEND.TITLE}
+    </span>
+  </HeroContainer>
+
+  <section
+    class="text-xl text-left px-20 max-w-[90ch] text-pretty mx-auto my-24 mt-40"
+  >
+    <div class="grid gap-4">
+      <h1
+        class="text-4xl font-semibold text-center text-wrap mx-auto tracking-wide"
+      >
+        {i18n.DATASEND.SUBTITLE}
+        {pais.nombre}
+      </h1>
+      <div class="flex justify-center">
+        <img class="w-40" src={pais.bandera} alt="" />
+      </div>
+    </div>
+
+    <section class="flex flex-col gap-8">
+      <h4 class="mb-10">{i18n.DATASEND.DATEPUB}</h4>
+
+      <div>
+        <h2 class="mb-4 font-semibold text-3xl">
+          {i18n.DATASEND.SECTION1.TITLE}
+          {pais.nombre}?
+        </h2>
+
+        <p>
+          {i18n.DATASEND.SECTION1.CONTENT1}
+          {pais.nombre}
+          {i18n.DATASEND.SECTION1.CONTENT2}
+        </p>
+        <ul>
+          {
+            pais.banco.map((banco) => (
+              <li>
+                <div class="flex items-center">
+                  <img
+                    src={banco.logo}
+                    alt={`Logo de ${banco.nombre}`}
+                    class="w-8 mr-2"
+                  />
+                  <p>{banco.nombre}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <p>
+          {i18n.DATASEND.SECTION1.CONTENT3}
+          {pais.nombre}
+          {i18n.DATASEND.SECTION1.CONTENT4}
+          <a href={translatePath("/contacto")} class="font-semibold"
+            >{i18n.DATASEND.LINK1}</a
+          >. <span>
+            {i18n.DATASEND.SECTION1.CONTENT5}
+            <a href={translatePath("/paises")} class="font-semibold"
+              >{i18n.DATASEND.LINK2}</a
+            >
+            {i18n.DATASEND.SECTION1.CONTENT6}
+          </span>
+        </p>
+      </div>
+
+      <div>
+        <h2 class="mb-4 font-semibold text-3xl">
+          {i18n.DATASEND.SECTION2.TITLE}
+          {pais.nombre}?
+        </h2>
+
+        <p>
+          {i18n.DATASEND.SECTION2.CONTENT1}
+          {pais.nombre}
+          {i18n.DATASEND.SECTION2.CONTENT2}
+          <a href={translatePath("/contacto")} class="font-semibold"
+            >{i18n.DATASEND.LINK3}</a
+          >
+          {i18n.DATASEND.SECTION2.CONTENT3}
+          <span>
+            {i18n.DATASEND.SECTION2.CONTENT4}
+            {pais.nombre}
+            {i18n.DATASEND.SECTION2.CONTENT5}
+          </span>
+        </p>
+      </div>
+
+      {
+        pais.nombre !== "Venezuela" && (
+          <div>
+            <h2 class="mb-4 font-semibold text-3xl">
+              {i18n.DATASEND.SECTION3.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION3.TITLE2}
+            </h2>
+
+            <p>
+              {i18n.DATASEND.SECTION3.CONTENT1} {pais.nombre}
+              {i18n.DATASEND.SECTION3.CONTENT2} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION3.CONTENT3}
+              <span>
+                {i18n.DATASEND.SECTION3.CONTENT4}
+                <a href={translatePath("/contacto")} class="font-semibold">
+                  {i18n.DATASEND.LINK1}
+                </a>
+                .
+              </span>
+            </p>
+          </div>
+        )
+      }
+
+      {
+        pais.nombre !== "Colombia" && (
+          <div>
+            <h2 class="mb-4 font-semibold text-3xl">
+              {i18n.DATASEND.SECTION4.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION4.TITLE2}
+            </h2>
+
+            <p>
+              {i18n.DATASEND.SECTION4.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION4.CONTENT2}
+              {pais.nombre} {i18n.DATASEND.SECTION4.CONTENT3}
+              <span>
+                {i18n.DATASEND.SECTION4.CONTENT4}
+                <a href={translatePath("/contacto")} class="font-semibold">
+                  {i18n.DATASEND.LINK1}
+                </a>
+                .
+              </span>
+            </p>
+          </div>
+        )
+      }
+
+      {
+        pais.nombre !== "Chile" && (
+          <div>
+            <h2 class="mb-4 font-semibold text-3xl">
+              {i18n.DATASEND.SECTION5.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION5.TITLE2}
+            </h2>
+
+            <p>
+              {i18n.DATASEND.SECTION5.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION5.CONTENT2}
+              {pais.nombre} {i18n.DATASEND.SECTION5.CONTENT3}
+              <span>
+                {i18n.DATASEND.SECTION5.CONTENT4}
+                <a href={translatePath("/contacto")} class="font-semibold">
+                  {i18n.DATASEND.LINK1}
+                </a>
+                .
+              </span>
+            </p>
+          </div>
+        )
+      }
+
+      {
+        pais.nombre !== "Estados Unidos" && (
+          <div>
+            <h2 class="mb-4 font-semibold text-3xl">
+              {i18n.DATASEND.SECTION6.TITLE} {pais.nombre}?
+            </h2>
+
+            <p>
+              {i18n.DATASEND.SECTION6.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION6.CONTENT2}
+              {pais.nombre} {i18n.DATASEND.SECTION6.CONTENT3}
+              <span>
+                {i18n.DATASEND.SECTION6.CONTENT4}
+                <a href={translatePath("/contacto")} class="font-semibold">
+                  {i18n.DATASEND.LINK1}
+                </a>
+                .
+              </span>
+            </p>
+          </div>
+        )
+      }
+
+      {
+        pais.nombre !== "España" && (
+          <div>
+            <h2 class="mb-4 font-semibold text-3xl">
+              {i18n.DATASEND.SECTION7.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION7.TITLE2}
+            </h2>
+
+            <p>
+              {i18n.DATASEND.SECTION7.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION7.CONTENT2} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION7.CONTENT3}
+              <span>
+                {i18n.DATASEND.SECTION7.CONTENT4}
+                <a href={translatePath("/contacto")} class="font-semibold">
+                  {i18n.DATASEND.LINK1}
+                </a>
+                .
+              </span>
+            </p>
+          </div>
+        )
+      }
+
+      <div class="boton flex justify-center">
+        <a
+          href={translatePath("/contacto")}
+          class="py-3 px-32 text-xl font-medium text-white border border-solid border-white rounded-full sm:w-fit hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-primary-300"
+        >
+          {i18n.DATASEND.LINK4}
+        </a>
+      </div>
+    </section>
+  </section>
+</Layout>
+
+<style>
+  a {
+    transition:
+      text-shadow 0.5s ease-out,
+      box-shadow 0.3s ease-out;
+  }
+
+  .boton a:hover {
+    box-shadow: 0 0 15px #fff;
+    text-shadow: 1px 1px 20px #fff;
+  }
+
+  a:hover {
+    text-shadow: 1px 1px 20px #fff;
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+import Dolar from "./icons/Dolar.astro";
+import { Tasa1 } from "./queryTasa.tsx";
+import Close from "./icons/Close.astro";
+import { getI18N } from "@/i18n/index";
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const tasas = await Tasa1();
+---
+
+<button popovertarget="my-popover" class="fixed bottom-10 right-10 z-50">
+  <Dolar
+    class="w-12 h-12 text-amber-400 hover:text-amber-500/90 hover:scale-110 hover:-rotate-45 transition-transform duration-500"
+  />
+</button>
+
+<div
+  id="my-popover"
+  popover
+  class="items-end md:max-w-2/3 lg:max-w-md bg-gray-900 border border-gray-600 rounded-lg shadow shadow-white"
+>
+  <div class="relative">
+    <img
+      class="rounded-t-lg opacity-90 h-full"
+      src="/inicio/Dolar.webp"
+      alt="Imagen de Dólares"
+      style="mask-image: linear-gradient(gray 50%, transparent)"
+    />
+    <button
+      popovertarget="my-popover"
+      popovertargetaction="hide"
+      class="absolute top-2 right-2 shadow-lg bg-white/90 text-gray-600 hover:text-white hover:bg-red-500 rounded-full p-1"
+    >
+      <Close class="w-4 h-4" />
+    </button>
+    <h2
+      class="shadown absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-semibold text-center"
+    >
+      {i18n.MODAL.TITLE2}
+    </h2>
+  </div>
+
+  <div class="p-5 bg-gray-900 md:text-2xl">
+    <p class="mb-3">
+      {i18n.MODAL.DATE}
+      {tasas.monitors.usd.last_update}
+    </p>
+    <p class="mb-3">
+      $ USD: {tasas.monitors.usd.price}
+      <span class="text-[green]">
+        {tasas.monitors.usd.symbol}
+      </span>
+      <span>{tasas.monitors.usd.percent} %</span>
+    </p>
+  </div>
+
+  <style>
+    [popover] {
+      top: 8rem;
+      margin: 0 auto;
+      box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    /*   IS-OPEN STATE   */
+    [popover]:popover-open {
+      translate: 0 0;
+    }
+
+    /*   EXIT STATE   */
+    [popover] {
+      transition:
+        translate 0.7s ease-out,
+        display 0.7s ease-out allow-discrete;
+      translate: 0 -22rem;
+    }
+
+    /*   0. BEFORE-OPEN STATE   */
+    @starting-style {
+      [popover]:popover-open {
+        translate: 0 -22rem;
+      }
+    }
+  </style>
+</div>

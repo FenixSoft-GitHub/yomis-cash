@@ -1,0 +1,49 @@
+---
+import { db, Exchange } from "astro:db";
+import CalculatorIcon from "./icons/CalculatorIcon.astro";
+import RemesaCalculator from "./RemesaCalculator.astro";
+
+const exchangeRates = await db.select().from(Exchange);
+---
+
+<button popovertarget="my-popover2" class="fixed bottom-28 right-10 z-50">
+  <CalculatorIcon
+    class="w-12 h-12 text-slate-800 hover:scale-110 hover:rotate-45 transition-transform duration-500 border border-amber-300 rounded-full p-1 bg-amber-400"
+  />
+</button>
+
+<div
+  id="my-popover2"
+  popover
+  class="items-end md:max-w-dvw lg:max-w-sm bg-white/90 border border-gray-600 rounded-lg shadow shadow-white"
+>
+  <RemesaCalculator exchangeRates={exchangeRates} />
+</div>
+
+<style>
+  [popover] {
+    top: 7rem;
+    margin: 0 auto;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3);
+  }
+
+  /*   IS-OPEN STATE   */
+  [popover]:popover-open {
+    translate: 0 0;
+  }
+
+  /*   EXIT STATE   */
+  [popover] {
+    transition:
+      translate 0.7s ease-out,
+      display 0.7s ease-out allow-discrete;
+    translate: 0 -22rem;
+  }
+
+  /*   0. BEFORE-OPEN STATE   */
+  @starting-style {
+    [popover]:popover-open {
+      translate: 0 -22rem;
+    }
+  }
+</style>

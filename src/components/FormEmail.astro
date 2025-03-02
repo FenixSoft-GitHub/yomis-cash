@@ -1,0 +1,97 @@
+---
+import { getI18N } from "@/i18n/"
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const TOKEN = import.meta.env.TOKEN_EMAIL;
+---
+
+<section class={`
+        rounded-xl
+		backdrop-blur-md
+		border border-white/30
+		shadow-inner shadow-white/50
+		overflow-hidden
+        `}
+>
+  <div class="py-8 lg:py-12 px-6 mx-auto max-w-screen-md">
+    <h2 class="mb-4 text-4xl tracking-tight font-semibold text-center text-gray-300">
+        {i18n.CONTACTUS.TITLE}
+    </h2>
+    <p class="mb-8 lg:mb-14 font-light text-center text-wrap text-gray-300 sm:text-lg"
+    >
+        {i18n.CONTACTUS.CONTENT_2}
+    </p>
+    <form action=`https://formsubmit.co/${TOKEN}` method="POST" class="space-y-8">
+        <div>
+            <label 
+                for="email" 
+                class="block mb-2 text-sm font-medium text-gray-300"
+            >
+                {i18n.CONTACTUS.FORM.BODY_1}
+            </label>
+            <input 
+                type="email" 
+                id="email"
+                name="email" 
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" 
+                placeholder={i18n.CONTACTUS.FORM.PLACEHOLDER_1} 
+                required
+            >
+            </div>
+        <div>
+            <label 
+                for="subject" 
+                class="block mb-2 text-sm font-medium text-gray-300"
+            >
+                {i18n.CONTACTUS.FORM.BODY_2}
+            </label>
+            <input 
+                type="text" 
+                id="subject"
+                name="subject" 
+                class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500" 
+                placeholder={i18n.CONTACTUS.FORM.PLACEHOLDER_2} 
+                required
+            >
+        </div>
+        <div class="sm:col-span-2">
+            <label 
+                for="message" 
+                class="block mb-2 text-sm font-medium text-gray-300"
+            >
+                {i18n.CONTACTUS.FORM.BODY_3}
+            </label>
+            <textarea 
+                name="message" 
+                placeholder="Déjanos saber cómo podemos ayudarte" 
+                id="message" 
+                rows="6"
+                class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500" 
+            ></textarea>
+        </div>
+        <input type="hidden" name="_autoresponse" value="Tu mensaje se ha recibido, pronto te contactaremos, gracias por preferirnos. ">
+        <input type="hidden" name="_template" value="box">
+        <button 
+            type="submit" 
+            class="py-3 px-5 text-sm font-medium text-center text-white border border-solid border-white rounded-full sm:w-fit hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-primary-300">
+            {i18n.CONTACTUS.BUTTON}
+        </button>
+    </form>
+  </div>
+</section>
+
+<style>
+    button {
+        transition:
+            text-shadow 0.5s ease-out,
+            box-shadow 0.3s ease-out;
+    }
+
+    button:hover {
+        box-shadow: 0 0 15px #fff;
+        text-shadow:
+            1px 1px 20px #fff;
+    }
+</style>

@@ -1,0 +1,154 @@
+---
+import Button from "@/components/Button";
+import HeaderLink from "@/components/HeaderLink.astro";
+import Logo from "./Logo.astro";
+import MenuIcon from "@/components/icons/Menu.astro";
+import CloseIcon from "@/components/icons/Close.astro";
+import LanguageSelector from "@/components/LanguageSelector.astro";
+
+import { getI18N } from "@/i18n/index";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../i18n/utils";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<header id="header-nav" class="fixed top-0 w-full px-6 py-1 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <HeaderLink
+      checkActive={false}
+      href={translatePath("/")}
+      class="relative z-10 duration-500 hover:scale-110 md:static lg:px-3"
+      aria-label={i18n.HEADER.LOGO}
+    >
+      <Logo logoSize="16" />
+    </HeaderLink>
+
+    <a href="#header-menu" class="md:hidden">
+      <MenuIcon />
+    </a>
+
+    <nav
+      id="header-menu"
+      class="fixed w-full h-dvh inset-0 bg-[#151a36]/90 md:text-base lg:text-xl flex flex-col items-center justify-center gap-8 -translate-y-full transition-transform duration-300 md:static md:h-[initial] md:bg-[initial] md:flex-row md:translate-y-[initial] z-50 md:py-6"
+    >
+      <div class="md:hidden absolute top-6 right-6">
+        <a href="#header-nav" class="block">
+          <CloseIcon />
+        </a>
+      </div>
+
+      <HeaderLink class="text__glowing" href={translatePath("/")}>
+        {t("nav.inicio")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/nosotros/")}>
+        {t("nav.nosotros")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/paises/")}>
+        {t("nav.paises")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/comofunciona/")}>
+        {t("nav.comofunciona")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/contacto/")}>
+        {t("nav.contacto")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/admin/admin/")}>
+        {t("nav.admin")}
+      </HeaderLink>
+      <LanguageSelector />
+      <Button
+        className="md:py-2 md:ml-auto md:text-base lg:text-base"
+        url="#"
+        target="_self"
+      >
+        {i18n.HEADER_BUTTON}
+      </Button>
+    </nav>
+  </div>
+</header>
+
+<style>
+  #header-menu:target {
+    transform: translateY(0);
+  }
+</style>
+
+<!-- ---
+import Button from "@/components/Button";
+import HeaderLink from "@/components/HeaderLink.astro";
+import Logo from "./Logo.astro";
+import MenuIcon from "@/components/icons/Menu.astro";
+import CloseIcon from "@/components/icons/Close.astro";
+import LanguageSelector from "@/components/LanguageSelector.astro";
+
+import { getI18N } from "@/i18n/index";
+import {
+  getLangFromUrl,
+  useTranslations,
+  useTranslatedPath,
+} from "../i18n/utils";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<header id="header-nav" class="fixed top-0 w-full px-6 py-1 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-16">
+    <HeaderLink
+      checkActive={false}
+      href={translatePath("/")}
+      class="relative z-10 duration-500 hover:scale-110"
+      aria-label={i18n.HEADER.LOGO}
+    >
+      <Logo logoSize="16" />
+    </HeaderLink>
+    <nav
+      id="header-menu"
+      class="fixed w-full h-dvh inset-0 bg-[#151a36]/90 md:text-base lg:text-xl flex flex-col items-center justify-center gap-8 -translate-y-full transition-transform duration-300 target:translate-y-0 md:static md:h-[initial] md:bg-[initial] md:flex-row md:translate-y-[initial]"
+    >
+      <HeaderLink class="text__glowing" href={translatePath("/")}>
+        {t("nav.inicio")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/nosotros/")}>
+        {t("nav.nosotros")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/paises/")}>
+        {t("nav.paises")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/comofunciona/")}>
+        {t("nav.comofunciona")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/contacto/")}>
+        {t("nav.contacto")}
+      </HeaderLink>
+      <HeaderLink class="text__glowing" href={translatePath("/admin/admin/")}>
+        {t("nav.admin")}
+      </HeaderLink>
+      <LanguageSelector />
+      <Button
+        className="md:py-2 md:ml-auto md:text-base lg:text-base"
+        url="#"
+        target="_self"
+      >
+        {i18n.HEADER_BUTTON}
+      </Button>
+      <a href="#header-nav" class="md:hidden absolute top-6 right-6">
+        <CloseIcon />
+      </a>
+    </nav>
+    <a href="#header-menu" class="md:hidden"><MenuIcon /></a>
+  </div>
+</header> -->

@@ -1,0 +1,217 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroContainer from "../HeroContainer.astro";
+import Logo from "../Logo.astro";
+import PreguntasItem from "@/components/PreguntasItem.astro";
+import { getI18N } from "@/i18n/";
+
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+---
+
+<Layout
+  title=`${i18n.SEO_TITLE_1} ${new Date().getFullYear()} ${i18n.SEO_TITLE_2}`
+  description={i18n.SEO_DESCRIPTION}
+>
+  <HeroContainer img="/ComoFunciona.webp">
+    <span class="shadown text-8xl tracking-widest font-great">
+      {i18n.HOWITWORKS.TITLE}
+    </span>
+  </HeroContainer>
+
+  <main class="pb-24 mt-40">
+    <section
+      class="w-full max-w-[1400px] mx-auto my-24 gap-10 text-pretty px-6 text-left text-xl sm:px-20 flex flex-col md:flex-row items-center justify-between p-6 md:p-8"
+    >
+      <div id="theater-text" class="md:w-1/2 space-y-4">
+        <h1
+          class="mx-auto mb-10 text-balance text-left text-3xl lg:text-5xl font-semibold tracking-wide"
+        >
+          {i18n.HOWITWORKS.TITLE_1}
+        </h1>
+        <p set:html={i18n.HOWITWORKS.CONTENT_1} />
+      </div>
+      <div id="theater" class="mt-6 md:mt-0 md:w-1/2">
+        <img
+          class="object-cover w-full h-full rounded-md"
+          height={500}
+          src="/comofuncionamos/Manos.webp"
+          style={{
+            aspectRatio: "812/556",
+            objectFit: "cover",
+          }}
+          width={500}
+        />
+      </div>
+    </section>
+
+    <section
+      class="w-full max-w-[1400px] mx-auto my-24 gap-10 text-pretty px-6 text-left text-xl sm:px-20 flex flex-col md:flex-row items-center justify-between p-6 md:p-8"
+    >
+      <div id="trophies" class="mt-6 md:mt-0 md:w-1/2">
+        <img
+          class="object-cover w-full h-full rounded-md"
+          height={556}
+          src="/comofuncionamos/ContarDinero.webp"
+          style={{
+            aspectRatio: "812/556",
+            objectFit: "cover",
+          }}
+          width={812}
+        />
+      </div>
+      <div id="trophies-text" class="md:w-1/2 space-y-4">
+        <h1
+          class="mx-auto mb-10 text-balance text-left text-3xl lg:text-5xl font-semibold tracking-wide"
+        >
+          {i18n.HOWITWORKS.TITLE_2}
+        </h1>
+        <p set:html={i18n.HOWITWORKS.CONTENT_2} />
+      </div>
+    </section>
+
+    <section
+      class="w-full max-w-[1400px] mx-auto my-24 gap-10 text-pretty px-6 text-left text-xl sm:px-20 flex flex-col md:flex-row items-center justify-between p-6 md:p-8"
+    >
+      <div id="theater-text" class="md:w-1/2 space-y-4">
+        <h1
+          class="mx-auto mb-10 text-balance text-left text-3xl lg:text-5xl font-semibold tracking-wide"
+        >
+          {i18n.HOWITWORKS.TITLE_3}
+        </h1>
+        <p set:html={i18n.HOWITWORKS.CONTENT_3} />
+      </div>
+      <div id="theater" class="mt-6 md:mt-0 md:w-1/2">
+        <img
+          class="object-cover w-full h-full rounded-md"
+          height={500}
+          src="/comofuncionamos/Entrega.webp"
+          style={{
+            aspectRatio: "812/556",
+            objectFit: "cover",
+          }}
+          width={500}
+        />
+      </div>
+    </section>
+
+    <section
+      class="w-full max-w-[1400px] mx-auto my-24 gap-10 text-pretty px-6 text-left text-xl sm:px-20 flex flex-col md:flex-row items-center justify-between p-6 md:p-8"
+    >
+      <div id="trophies" class="mt-6 md:mt-0 md:w-1/2">
+        <img
+          class="object-cover w-full h-full rounded-md"
+          height={556}
+          src="/comofuncionamos/Transferencia.webp"
+          style={{
+            aspectRatio: "812/556",
+            objectFit: "cover",
+          }}
+          width={812}
+        />
+      </div>
+      <div id="trophies-text" class="md:w-1/2 space-y-4">
+        <h1
+          class="mx-auto mb-10 text-balance text-left text-3xl lg:text-5xl font-semibold tracking-wide"
+        >
+          {i18n.HOWITWORKS.TITLE_4}
+        </h1>
+        <p set:html={i18n.HOWITWORKS.CONTENT_4} />
+      </div>
+    </section>
+
+    <section
+      id="faq"
+      class="lg:text-xl text-left px-20 max-w-[70ch] text-pretty mx-auto my-10"
+    >
+      <Logo logoSize="16" />
+
+      <h1
+        class="text-4xl font-semibold text-center text-wrap mx-auto mb-10 tracking-wide"
+      >
+        {i18n.HOWITWORKS.FAQ.TITLE}
+      </h1>
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_1}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_1}
+      />
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_2}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_2}
+      />
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_3}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_3}
+      />
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_4}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_4}
+      />
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_5}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_5}
+      />
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_6}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_6}
+      />
+      <PreguntasItem
+        questions={i18n.HOWITWORKS.FAQ.QUESTIONS_7}
+        answers={i18n.HOWITWORKS.FAQ.ANSWER_7}
+      />
+    </section>
+  </main>
+</Layout>
+
+<style>
+  #theater,
+  #trophies-text h1,
+  #trophies-text p {
+    animation: cover-animation linear both;
+    animation-timeline: view();
+  }
+  #theater-text h1,
+  #theater-text p,
+  #trophies {
+    animation: entry-animation linear both;
+    animation-timeline: view();
+  }
+  #theater {
+    animation-range: entry 10% cover 40%;
+  }
+  #theater-text h1 {
+    animation-range: entry 10% cover 30%;
+  }
+  #theater-text p {
+    animation-range: entry 10% cover 20%;
+  }
+  #trophies {
+    animation-range: entry 30% cover 50%;
+  }
+  #trophies-text h1 {
+    animation-range: entry 30% cover 40%;
+  }
+  #trophies-text p {
+    animation-range: entry 20% cover 30%;
+  }
+  @keyframes entry-animation {
+    0% {
+      opacity: 0;
+      translate: var(--entry-animation) 0;
+    }
+    100% {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  @keyframes cover-animation {
+    0% {
+      opacity: 0;
+      translate: var(--cover-animation) 0;
+    }
+    100% {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+</style>

@@ -1,0 +1,131 @@
+---
+import BentoItem from "./BentoItem.astro";
+import { Tasa1 } from "./queryTasa.tsx";
+import { getI18N } from "@/i18n/";
+
+const tasas = await Tasa1();
+const { currentLocale } = Astro;
+const i18n = getI18N({ currentLocale });
+const color = tasas.monitors.usd.color;
+---
+
+<section
+  class={`
+        w-full max-w-[1400px] 
+        grid lg:grid-cols-10 auto-rows-[30rem] gap-4 
+        mx-auto p-6 md:p-8 lg:p-12
+    `}
+>
+  <BentoItem class="col-span-10 lg:col-span-4" title={i18n.BENTO_TITLE_1}>
+    <div
+      slot="image"
+      class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 w-full h-full bg-cover bg-center bg-no-repeat opacity-80 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+      data-src="/inicio/Envio.webp"
+    >
+    </div>
+    <p
+      slot="content"
+      class="max-w-xl text-base md:text-lg mb-4"
+      set:html={i18n.BENTO_CONTENT_1}
+    />
+  </BentoItem>
+
+  <BentoItem
+    class="col-span-10 lg:col-span-6"
+    title={i18n.BENTO_TITLE_2}
+    subtitle={i18n.BENTO_SUBTITLE_2}
+  >
+    <div
+      slot="image"
+      class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 h-full w-full bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+      data-src="/inicio/Family.webp"
+    >
+    </div>
+    <p
+      slot="content"
+      class="max-w-xl text-base md:text-lg mb-4"
+      set:html={i18n.BENTO_CONTENT_2}
+    />
+  </BentoItem>
+
+  <BentoItem class="col-span-10 lg:col-span-6" title={i18n.BENTO_TITLE_3}>
+    <div
+      slot="image"
+      class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 h-full w-full bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+      data-src="/inicio/Team.jpg"
+    >
+    </div>
+    <p
+      slot="content"
+      class="max-w-xl text-base md:text-lg mb-4"
+      set:html={i18n.BENTO_CONTENT_3}
+    />
+  </BentoItem>
+
+  <BentoItem class="col-span-10 lg:col-span-4" title={i18n.BENTO_TITLE_4}>
+    <div
+      slot="image"
+      class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 h-full w-full bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+      data-src="/inicio/transferencia-bancaria.jpg"
+    >
+    </div>
+    <p
+      slot="content"
+      class="max-w-xl text-base md:text-lg mb-4"
+      set:html={i18n.BENTO_CONTENT_4}
+    />
+  </BentoItem>
+
+  <BentoItem class="col-span-10 lg:col-span-10" title={i18n.BENTO_TITLE_5}>
+    <div
+      slot="image"
+      class="background transition-scale absolute bottom-0 left-0 top-0 -z-10 h-full w-full bg-cover bg-center bg-no-repeat opacity-90 bg-blend-luminosity duration-1000 ease-in-out group-hover:scale-110"
+      data-src="/inicio/Dolar.webp"
+    >
+    </div>
+    <p slot="content" class="max-w-xl text-base md:text-lg">
+      {i18n.BENTO_CONTENT_5}
+      {tasas.monitors.usd.last_update}
+    </p>
+    <p slot="content" class="max-w-xl text-base md:text-lg mb-4">
+      $ USD: {tasas.monitors.usd.price}
+      <span class={`text-[${color}]`}>{tasas.monitors.usd.symbol}</span>
+      <span>{tasas.monitors.usd.percent} %</span>
+    </p>
+  </BentoItem>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const backgrounds = document.querySelectorAll(
+      ".background"
+    ) as NodeListOf<HTMLElement>;
+
+    if (window.IntersectionObserver == null) {
+      backgrounds.forEach((bkg) => {
+        bkg.style.backgroundImage = "url('" + bkg.dataset.src + "')";
+      });
+      return;
+    }
+
+    function handleIntersection(entries: IntersectionObserverEntry[]) {
+      entries.map((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          const { style, dataset } = target;
+          // Item has crossed our observation
+          // threshold - load src from data-src
+          style.backgroundImage = "url('" + dataset.src + "')";
+          // Job done for this item - no need to watch it!
+          observer.unobserve(entry.target);
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      rootMargin: "100px",
+    });
+
+    backgrounds.forEach((bkg) => observer.observe(bkg));
+  });
+</script>

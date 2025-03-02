@@ -1,0 +1,49 @@
+---
+import AngleDown from '@/components/icons/AngleDown.astro';
+
+interface Props {
+    questions: string;
+    answers: string;
+}
+
+const { questions, answers } = Astro.props
+---
+
+<section class="text-sm lg:text-base">
+    <details name="faq">
+        <summary class="lg:text-xl md:h-full md:text-base lg:h-20 relative w-full flex text-black justify-between">
+            <span>{questions}</span>
+            <span><AngleDown/></span>
+        </summary>
+        <p>{answers}</p>
+    </details>
+</section>
+
+<style>
+    details {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 10px;
+    }
+
+    details > p {
+        padding: 10px;
+        max-height: 50;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    summary {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #f0f0f0;
+    }
+
+    details[open] summary {
+        background-color: #b3b0b0;
+    }
+
+    details[open] summary .angle {
+        transform: rotate(180deg);
+    }
+</style>

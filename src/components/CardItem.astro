@@ -1,0 +1,39 @@
+---
+interface Props {
+	title: string;
+	body: string;
+	subbody?: string;
+}
+
+const { subbody, title, body } = Astro.props;
+---
+
+<article 
+	class={`
+		rounded-xl
+		backdrop-blur-md
+		border border-white/30
+		shadow-inner shadow-white/50
+		overflow-hidden
+		flex flex-row
+		mb-4
+		items-center
+		h-36 
+		md:w-full
+		lg:mb-14
+	`}
+>
+	
+	<div class="mx-6 text-white/40 duration-300 ease-in-out hover:scale-125 hover:text-white/80">
+		<slot name="icons" />
+	</div>
+
+	<div class="relative select-none flex flex-col gap-1 p-2 text-lg z-20 justify-center aspect-auto">
+		<h2 class="lg:text-2xl text-balance text-white/80 mb-6">
+			{title}
+			<span>&rarr;</span>
+		</h2>
+		<span class="text-sm lg:text-xl text-sky-200/80 -mt-4 mb-4">{body}</span>
+		<span class="text-sm lg:text-xl text-sky-200/80 -mt-4 mb-4">{subbody}</span>
+	</div>
+</article>

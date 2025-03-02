@@ -1,0 +1,224 @@
+{
+  "bank": [
+    {
+      "pais": {
+        "nombre": "Venezuela",
+        "bandera": "/mapas/venezuela.webp",
+        "moneda": "Bolivares",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Mercantil",
+            "logo": "/banks/Bancolombia.webp"
+          },
+          {
+            "nombre": "Venezuela",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banesco",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Ecuador",
+        "bandera": "/mapas/ecuador.webp",
+        "moneda": "Dólar Americano",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Banco Ecuador",
+            "logo": "/banks/BankOfAmerica.webp"
+          },
+          {
+            "nombre": "Banco Guayaguil",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banco Quito",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Argentina",
+        "bandera": "/mapas/argentina.webp",
+        "moneda": "Pesos Argentinos",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Banco Argentina",
+            "logo": "/banks/Bancolombia.webp"
+          },
+          {
+            "nombre": "Otro Bancos",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Otros Bancos",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Chile",
+        "bandera": "/mapas/chile.webp",
+        "moneda": "Dólar Americano",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Banco de Chile",
+            "logo": "/banks/BankOfAmerica.webp"
+          },
+          {
+            "nombre": "Banco ***",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banco ***",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Colombia",
+        "bandera": "/mapas/colombia.webp",
+        "moneda": "Pesos Colombianos",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Bancolombia",
+            "logo": "/banks/Bancolombia.webp"
+          },
+          {
+            "nombre": "Chase Bank",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Wells Fargo",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Perú",
+        "bandera": "/mapas/peru.webp",
+        "moneda": "Soles",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Banco del Perú",
+            "logo": "/banks/BankOfAmerica.webp"
+          },
+          {
+            "nombre": "Banco Pichincha",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banco ***",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Brasil",
+        "bandera": "/mapas/brazil.webp",
+        "moneda": "Reales",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Banco do Brazil",
+            "logo": "/banks/Bancolombia.webp"
+          },
+          {
+            "nombre": "Bank ***",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banco ***",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "México",
+        "bandera": "/mapas/mexico.webp",
+        "moneda": "Pesos Mexicanos",
+        "continente": "América del Norte",
+        "banco": [
+          {
+            "nombre": "Bank of México",
+            "logo": "/banks/BankOfAmerica.webp"
+          },
+          {
+            "nombre": "Bank ***",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banco ***",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "Estados Unidos",
+        "bandera": "/mapas/america.webp",
+        "moneda": "Dólar Americano",
+        "continente": "América del Norte",
+        "banco": [
+          {
+            "nombre": "Bank of America",
+            "logo": "/banks/BankOfAmerica.webp"
+          },
+          {
+            "nombre": "Chase Bank",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Wells Fargo",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    },
+    {
+      "pais": {
+        "nombre": "República Dominicana",
+        "bandera": "/mapas/dominican.webp",
+        "moneda": "Pesos Colombianos",
+        "continente": "América del Sur",
+        "banco": [
+          {
+            "nombre": "Banco Dominicana",
+            "logo": "/banks/Bancolombia.webp"
+          },
+          {
+            "nombre": "Bank ***",
+            "logo": "/banks/Chase.webp"
+          },
+          {
+            "nombre": "Banco ***",
+            "logo": "/banks/WellsFargo.webp"
+          }
+        ]
+      }
+    }
+  ]
+}
