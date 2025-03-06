@@ -18,7 +18,8 @@
   "HEADER_COMO_FUNCIONA": "Como Funcionamos",
   "HEADER_CONTACTO": "Contacto",
   "HEADER_ADMIN": "Administración",
-  "HEADER_BUTTON": "ACCESO",
+  "HEADER_BUTTON": "Iniciar Sesión",
+  "HEADER_BUTTON_OUT": "Cerrar Sesión",
   "HERO_SUBTITLE": "Tu mejora alternativa para el envío de Remesas en Latinoamérica",
 
   "INTRO_TITLE": "Yomi's Cash",

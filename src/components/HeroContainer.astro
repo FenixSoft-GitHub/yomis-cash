@@ -5,23 +5,33 @@ interface Props {
 
 const { img } = Astro.props;
 ---
-<div
-  class="bg-no-repeat bg-cover relative w-full max-w-screen h-auto min-h-[40vh] lg:w-full lg:h-screen"
->
+
+<div class="bg-no-repeat bg-cover relative h-[80vh] w-full max-w-[100vw]">
   <img
-    class="w-full h-full object-cover object-top animate-fade-down animate-duration-[2s] -z-10"
+    class="w-full h-screen object-fill object-top animate-fade-down animate-duration-[2s] -z-10"
     src={img}
     alt="Fondo de Playa"
     style="mask-image: linear-gradient(black 80%, transparent)"
   />
   <img
-    class="w-full h-screen absolute lg:-bottom-36 md:-bottom-0 blur-3xl -z-40"
+    class="w-full h-screen absolute -bottom-48 blur-3xl -z-40"
     src={img}
     alt="Fondo de Playa"
   />
   <div
-    class="absolute inset-0 m-auto w-full h-screen flex justify-center flex-col items-center"
+    class="absolute inset-0 m-auto w-full h-full flex justify-center flex-col items-center"
   >
     <slot />
   </div>
 </div>
+
+<!-- class="bg-no-repeat bg-cover relative w-full max-w-screen h-auto min-h-[40vh]
+lg:w-full lg:h-screen" -->
+
+<!-- class="w-full h-full object-cover object-top animate-fade-down
+animate-duration-[2s] -z-10" -->
+
+<!-- class="w-full h-screen absolute lg:-bottom-36 md:-bottom-0 blur-3xl -z-40" -->
+
+<!-- class="absolute inset-0 m-auto w-full h-screen flex justify-center flex-col
+items-center" -->

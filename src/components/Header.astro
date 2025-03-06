@@ -32,19 +32,19 @@ const translatePath = useTranslatedPath(lang);
       <Logo logoSize="16" />
     </HeaderLink>
 
-    <a href="#header-menu" class="md:hidden">
+    <!-- <a href="#header-menu" class="md:hidden">
       <MenuIcon />
-    </a>
+    </a> -->
 
     <nav
       id="header-menu"
-      class="fixed w-full h-dvh inset-0 bg-[#151a36]/90 md:text-base lg:text-xl flex flex-col items-center justify-center gap-8 -translate-y-full transition-transform duration-300 md:static md:h-[initial] md:bg-[initial] md:flex-row md:translate-y-[initial] z-50 md:py-6"
+      class="fixed w-full h-dvh inset-0 bg-[#151a36]/90 md:text-base lg:text-xl flex flex-col items-center justify-center gap-8 -translate-y-full transition-transform duration-300 target:translate-y-0 md:static md:h-[initial] md:bg-[initial] md:flex-row md:translate-y-[initial]"
     >
-      <div class="md:hidden absolute top-6 right-6">
+      <!-- <div class="md:hidden absolute top-6 right-6">
         <a href="#header-nav" class="block">
           <CloseIcon />
         </a>
-      </div>
+      </div> -->
 
       <HeaderLink class="text__glowing" href={translatePath("/")}>
         {t("nav.inicio")}
@@ -67,12 +67,16 @@ const translatePath = useTranslatedPath(lang);
       <LanguageSelector />
       <Button
         className="md:py-2 md:ml-auto md:text-base lg:text-base"
-        url="#"
+        url="/signin"
         target="_self"
       >
         {i18n.HEADER_BUTTON}
       </Button>
+      <a href="#header-nav" class="md:hidden absolute top-6 right-6">
+        <CloseIcon />
+      </a>
     </nav>
+    <a href="#header-menu" class="md:hidden"><MenuIcon /></a>
   </div>
 </header>
 

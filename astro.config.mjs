@@ -11,9 +11,9 @@ import preact from '@astrojs/preact';
 // https://astro.build/config
 export default defineConfig({
   integrations: [db(), preact()],
-  
+
   output: "server",
-  
+
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en", "pt"],
@@ -21,7 +21,7 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  
+
   vite: {
     plugins: [tailwindcss()],
     resolve: {

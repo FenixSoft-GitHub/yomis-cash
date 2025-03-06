@@ -6,9 +6,12 @@ import RemesaCalculator from "./RemesaCalculator.astro";
 const exchangeRates = await db.select().from(Exchange);
 ---
 
-<button popovertarget="my-popover2" class="fixed bottom-28 right-10 z-50">
+<button
+  popovertarget="my-popover2"
+  class="fixed bottom-28 right-10 z-50 hover:cursor-pointer"
+>
   <CalculatorIcon
-    class="w-12 h-12 text-slate-800 hover:scale-110 hover:rotate-45 transition-transform duration-500 border border-amber-300 rounded-full p-1 bg-amber-400"
+    class="w-12 h-12 text-black hover:scale-110 hover:rotate-45 transition-transform duration-500 border border-[rgba(52,216,251,1)] rounded-full p-1 bg-[rgba(52,216,251,1)] hover:bg-[rgba(52,216,251,0.9)]"
   />
 </button>
 

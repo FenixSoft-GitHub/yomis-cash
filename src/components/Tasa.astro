@@ -9,9 +9,12 @@ const i18n = getI18N({ currentLocale });
 const tasas = await Tasa1();
 ---
 
-<button popovertarget="my-popover" class="fixed bottom-10 right-10 z-50">
+<button
+  popovertarget="my-popover"
+  class="fixed bottom-10 right-10 z-50 hover:cursor-pointer"
+>
   <Dolar
-    class="w-12 h-12 text-amber-400 hover:text-amber-500/90 hover:scale-110 hover:-rotate-45 transition-transform duration-500"
+    class="w-12 h-12 text-[rgba(52,216,251,1)] hover:text-[rgba(52,216,251,0.9)] hover:scale-110 hover:-rotate-45 transition-transform duration-500"
   />
 </button>
 
@@ -30,7 +33,7 @@ const tasas = await Tasa1();
     <button
       popovertarget="my-popover"
       popovertargetaction="hide"
-      class="absolute top-2 right-2 shadow-lg bg-white/90 text-gray-600 hover:text-white hover:bg-red-500 rounded-full p-1"
+      class="absolute top-2 right-2 shadow-lg bg-white/90 text-gray-600 hover:text-white hover:bg-red-500 ease-in-out transition-colors duration-300 rounded-full p-1"
     >
       <Close class="w-4 h-4" />
     </button>

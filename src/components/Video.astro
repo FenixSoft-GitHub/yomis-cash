@@ -15,7 +15,7 @@ const i18n = getI18N({ currentLocale });
       class="absolute z-10 animate-fade-up flex justify-center items-center gap-2 flex-col"
     >
       <h1
-        class="subtitle flex items-center justify-center gap-2 md:text-8xl lg:gap-3 lg:text-9xl mb-10 font-great w-full"
+        class="subtitle flex items-center justify-center gap-2 text-6xl lg:gap-3 lg:text-9xl mb-10 font-great w-full"
       >
         <span>Y</span>
         <span>o</span>
@@ -23,7 +23,10 @@ const i18n = getI18N({ currentLocale });
         <span>i</span>
         <span>'</span>
         <span>s</span>
-        <Logo logoSize="36" />
+        <span> </span>
+        <div class="sm:flex hidden">
+          <Logo logoSize="36" />
+        </div>
         <span>C</span>
         <span>a</span>
         <span>s</span>
@@ -55,5 +58,3 @@ const i18n = getI18N({ currentLocale });
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
   }
 </style>
-
-
