@@ -15,7 +15,7 @@ const i18n = getI18N({ currentLocale });
       class="absolute z-10 animate-fade-up flex justify-center items-center gap-2 flex-col"
     >
       <h1
-        class="subtitle flex items-center justify-center gap-2 text-6xl lg:gap-3 lg:text-9xl mb-10 font-great w-full"
+        class="shadown flex items-center justify-center gap-2 text-6xl lg:gap-3 lg:text-9xl mb-10 font-great w-full"
       >
         <span>Y</span>
         <span>o</span>
@@ -25,7 +25,7 @@ const i18n = getI18N({ currentLocale });
         <span>s</span>
         <span> </span>
         <div class="sm:flex hidden">
-          <Logo logoSize="36" />
+          <Logo logoSize={8} />
         </div>
         <span>C</span>
         <span>a</span>
@@ -53,8 +53,3 @@ const i18n = getI18N({ currentLocale });
   />
 </section>
 
-<style>
-  .subtitle {
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
-  }
-</style>

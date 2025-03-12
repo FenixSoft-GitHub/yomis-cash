@@ -1,6 +1,6 @@
 ---
 interface Props {
-  logoSize: string; // Define la prop logoSize como un string
+  logoSize: number; // Define la prop logoSize como un string
 }
 
 const { logoSize } = Astro.props;
@@ -8,12 +8,14 @@ const { logoSize } = Astro.props;
 
 <div class="flex items-center justify-center">
   <img
-    class={`w-${logoSize} duration-500 hover:scale-110`} 
+    style={{ width: `${logoSize}rem` }}
+    class="duration-500 hover:scale-110"
     src="/YomisCash.webp"
     alt="Yomi's Cash"
   />
   <img
-    class={`absolute w-${logoSize} m-auto blur-md opacity-0 transition-opacity duration-300 hover:opacity-80`} 
+    style={{ width: `${logoSize}rem` }}
+    class="absolute m-auto blur-md opacity-0 transition-opacity duration-300 hover:opacity-80"
     src="/YomisCash.webp"
     alt="Yomi's Cash"
   />

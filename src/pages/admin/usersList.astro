@@ -1,0 +1,138 @@
+---
+import { supabase } from "@/lib/supabase";
+import Layout from "@/layouts/Layout.astro";
+import { isAuthenticated } from "@/middleware/auth";
+import AddIcon from "@/components/icons/AddIcon.astro";
+import EditIcon from "@/components/icons/EditIcon.astro";
+import DeleteIcon from "@/components/icons/DeleteIcon.astro";
+
+const {
+  data: { session },
+} = await supabase.auth.getSession();
+
+if (!session) {
+  console.log("No hay sesión activa.");
+  return;
+}
+
+const auth = await isAuthenticated(Astro, ["admin"]);
+
+if (auth) {
+  return auth;
+}
+
+let users = [];
+
+const { data, error } = await supabase
+  .from("customers")
+  .select("*")
+  .order("full_name", { ascending: true }); // Ordenar por nombre del país (ascendente);
+
+if (data) {
+  users = data;
+}
+
+if (error) {
+  console.error("Error al obtener tasas:", error);
+}
+---
+
+<Layout title="Usuarios" description="Listado de los usuarios registrados">
+  <section class="relative h-screen flex flex-col">
+    <!-- Header con la imagen de fondo -->
+    <div class="absolute bg-no-repeat bg-cover h-[80vh] w-full max-w-[100vw]">
+      <img
+        class="w-full h-full object-fill object-top animate-fade-down animate-duration-[2s] -z-30"
+        src="/User.webp"
+        alt="Fondo de Playa"
+        style="mask-image: linear-gradient(black 80%, transparent)"
+      />
+      <img
+        class="w-full h-full absolute -bottom-48 blur-3xl -z-40"
+        src="/User.webp"
+        alt="Fondo de Playa"
+      />
+    </div>
+
+    <!-- Contenedor de la tabla -->
+    <div
+      class="container px-8 sm:px-15 mt-50 mx-auto overflow-x-auto text-white flex-1 flex flex-col z-40"
+    >
+      <div class="flex justify-between my-2">
+        <h1 class="shadown text-center text-3xl">Lista de Usuarios</h1>
+      </div>
+
+      <!-- Tabla con scroll -->
+      <div
+        class="overflow-y-auto max-h-[calc(100vh-30vh-9rem)] border border-gray-300 rounded-md scrollbar-custom"
+      >
+        <table class="min-w-full text-white rounded-lg">
+          <thead class="bg-gray-900 text-white rounded-t-md sticky top-0">
+            <tr>
+              <th
+                class="px-6 py-3 text-left text-md font-medium text-gray-200 uppercase tracking-wider"
+                >Nombres y Apellidos</th
+              >
+              <th
+                class="px-6 py-3 text-md font-medium text-gray-200 uppercase tracking-wider text-center"
+                >No. Celular</th
+              >
+              <th
+                class="px-6 py-3 text-center text-md font-medium text-gray-200 uppercase tracking-wider"
+                >Email</th
+              >
+              <th
+                class="px-6 py-3 text-center text-md font-medium text-gray-200 uppercase tracking-wider"
+                >Rol</th
+              >
+              <th
+                class="px-6 py-3 text-center text-md font-medium text-gray-200 uppercase tracking-wider"
+                >Acciones</th
+              >
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {
+              users.map((user, index) => (
+                <tr
+                  class={`${index % 2 === 0 ? "bg-gray-500" : "bg-gray-600"} hover:bg-gray-400 transition-colors duration-200`}
+                >
+                  <td class="px-6 py-2 whitespace-nowrap">{user.full_name}</td>
+                  <td class="px-6 py-2 whitespace-nowrap">{user.phone}</td>
+                  <td class="px-6 py-2 whitespace-nowrap text-left">
+                    {user.email}
+                  </td>
+                  <td class="px-6 py-2 whitespace-nowrap text-center">
+                    {user.role || "Sin rol"}
+                  </td>
+                  <td class="px-6 py-2 whitespace-nowrap flex items-center justify-center gap-7">
+                    <a
+                      href={`/admin/editaruser/${user.id}`}
+                      class="bg-indigo-400 hover:bg-indigo-700 text-white font-semibold py-1 px-2 rounded flex justify-center items-center w-fit "
+                    >
+                      <EditIcon class="size-6 inline-block" />
+                    </a>
+                    <a
+                      href={`/admin/deleteuser/${user.id}`}
+                      class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded flex justify-center items-center w-fit "
+                    >
+                      <DeleteIcon class="size-6 inline-block" />
+                    </a>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <a
+        href="/admin/crearTasa"
+        class="mt-6 bg-linear-to-t from-blue-900 to-blue-500 hover:scale-110 text-white font-medium py-2 px-4 rounded-full flex justify-center items-center w-fit"
+      >
+        <AddIcon class="size-7 mr-2" />
+        Crear Nuevo Usuario
+      </a> -->
+    </div>
+  </section>
+</Layout>

@@ -1,9 +1,6 @@
 ---
-import { db, Exchange } from "astro:db";
 import CalculatorIcon from "./icons/CalculatorIcon.astro";
 import RemesaCalculator from "./RemesaCalculator.astro";
-
-const exchangeRates = await db.select().from(Exchange);
 ---
 
 <button
@@ -20,7 +17,7 @@ const exchangeRates = await db.select().from(Exchange);
   popover
   class="items-end md:max-w-dvw lg:max-w-sm bg-white/90 border border-gray-600 rounded-lg shadow shadow-white"
 >
-  <RemesaCalculator exchangeRates={exchangeRates} />
+  <RemesaCalculator />
 </div>
 
 <style>

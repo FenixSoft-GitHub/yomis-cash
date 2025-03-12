@@ -17,63 +17,82 @@
   /* ... */
 }
 
- :root {
-    color-scheme: dark;
-    --entry-animation: -20px;
-    --cover-animation: 20px;
-  }
+:root {
+  color-scheme: dark;
+  --entry-animation: -20px;
+  --cover-animation: 20px;
+}
 
-  @media (min-width: 1400px) {
-    :root {
-      --entry-animation: -100px;
-      --cover-animation: 100px;
-    }
+@media (min-width: 1400px) {
+  :root {
+    --entry-animation: -100px;
+    --cover-animation: 100px;
   }
+}
 
-  html {
-    font-family: "Montserrat", "Tomaso", system-ui, sans-serif;
-    background: #13151a;
-    scroll-behavior: auto;
-  }
+html {
+  font-family: "Montserrat", "Tomaso", system-ui, sans-serif;
+  background: #13151a;
+  scroll-behavior: auto;
+}
 
-  p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.4;
-    /* margin-bottom: 1em; */
-    font-weight: 100;
-    font-size: 1em;
-    letter-spacing: 0.5px;
-  }
+p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  /* margin-bottom: 1em; */
+  font-weight: 100;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+}
 
-  p strong {
-    color: white;
-    font-weight: 700;
-  }
+p strong {
+  color: white;
+  font-weight: 700;
+}
 
-  .text__glowing {
-    transition: text-shadow 0.3s ease;
-  }
+.text__glowing {
+  transition: text-shadow 0.3s ease;
+  font-size: 18px;
+}
 
-  .text__glowing:hover {
-    text-shadow: 1px 1px 20px #fff;
-  }
+.text__glowing:hover {
+  text-shadow: 1px 1px 20px #fff;
+}
 
-  #header-nav {
-    animation: blur linear both;
-    animation-timeline: scroll();
-    animation-range: 0 500px;
-  }
+#header-nav {
+  animation: blur linear both;
+  animation-timeline: scroll();
+  animation-range: 0 500px;
+}
 
-  @keyframes blur {
-    to {
-      box-shadow:
-        0px 5px 50px -5px rgba(255, 255, 255, 0.205),
-        0px 0px 0 1px rgba(0, 0, 0, 0.3);
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-    }
+@keyframes blur {
+  to {
+    box-shadow: 0px 5px 50px -5px rgba(255, 255, 255, 0.205),
+      0px 0px 0 1px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
   }
+}
 
-  .shadown {
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
-  }
+.shadown {
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* Estilos personalizados para la barra de scroll */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de scroll */
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Color de fondo de la pista */
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: #4a5568; /* Color del thumb (barra deslizante) */
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: #718096; /* Color del thumb al pasar el mouse */
+}

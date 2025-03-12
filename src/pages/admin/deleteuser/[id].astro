@@ -1,39 +1,58 @@
 ---
-import { supabase } from "@/lib/supabase";
+import { supabase, supabaseAdmin } from "@/lib/supabase";
 import Layout from "@/layouts/Layout.astro";
 import DeleteIcon from "@/components/icons/DeleteIcon.astro";
 import CancelIcon from "@/components/icons/CancelIcon.astro";
 
 const { id } = Astro.params;
 
-// Obtener la información de la tasa de cambio
-const { data: tasa, error } = await supabase
-  .from("exchange_rates")
-  .select("country") // Solo necesitamos el nombre del país
+// Obtener la información del usuario a eliminar
+const { data: userDelete, error } = await supabase
+  .from("customers")
+  .select("full_name, user_id") // Seleccionar el nombre y el user_id
   .eq("id", id)
   .single();
 
 if (error) {
-  console.error("Error al obtener la tasa:", error);
-  return Astro.redirect("/admin/tasasList"); // Redirigir en caso de error
+  console.error("Error al obtener el usuario:", error);
+  return Astro.redirect("/admin/usersList"); // Redirigir en caso de error
 }
 
-if (!tasa) {
-  return Astro.redirect("/admin/tasasList"); // Redirigir si la tasa no existe
+if (!userDelete) {
+  return Astro.redirect("/admin/usersList"); // Redirigir si el usuario no existe
 }
+
+console.log("Usuario id", userDelete.user_id);
 
 if (Astro.request.method === "POST") {
-  const { error } = await supabase.from("exchange_rates").delete().eq("id", id);
+  // 1. Eliminar el usuario de la tabla customers
+  const { error: deleteCustomerError } = await supabase
+    .from("customers")
+    .delete()
+    .eq("id", id);
 
-  if (error) {
-    console.error("Error al eliminar tasa:", error);
+  const { error: deleteRoleError } = await supabase
+    .from("user_roles")
+    .delete()
+    .eq("user_id", userDelete.user_id);
+
+  // 2. Eliminar el usuario del sistema de autenticación de Supabase
+  const { error: deleteAuthError } = await supabaseAdmin.auth.admin.deleteUser(
+    userDelete.user_id
+  );
+
+  if (deleteCustomerError || deleteAuthError) {
+    console.error(
+      "Error al eliminar el usuario:",
+      deleteCustomerError || deleteAuthError
+    );
   } else {
-    return Astro.redirect("/admin/tasasList/");
+    return Astro.redirect("/admin/usersList/");
   }
 }
 ---
 
-<Layout title="Eliminar País" description="">
+<Layout title="Eliminar Usuario" description="">
   <div
     class="flex justify-center items-center min-h-screen bg-linear-to-t from-zinc-900 to-zinc-500"
   >
@@ -41,11 +60,11 @@ if (Astro.request.method === "POST") {
       class="mx-auto w-full max-w-md p-6 grid gap-6 justify-center items-center bg-gray-700 text-white rounded-lg shadow-lg border border-gray-400"
     >
       <h2 class="text-2xl font-semibold tracking-wider text-center">
-        Eliminar País
+        Eliminar Usuario
       </h2>
       <p class="text-xl font-semibold">
         ¿Estás seguro de que deseas eliminar el registro de <span
-          >{tasa.country}?</span
+          >{userDelete.full_name}?</span
         >
       </p>
       <form method="post" class="flex justify-center gap-12">
@@ -56,7 +75,7 @@ if (Astro.request.method === "POST") {
           Eliminar
         </button>
         <a
-          href="/admin/tasasList/"
+          href="/admin/usersList/"
           class="bg-linear-to-t from-blue-900 to-[rgba(52,216,251,1)] hover:scale-105 text-white py-2 px-4 rounded-full w-fit transition ease-in-out duration-300 flex justify-center items-center gap-3"
         >
           <CancelIcon class="w-5 h-5 inline-block" />

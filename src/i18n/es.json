@@ -19,6 +19,8 @@
   "HEADER_CONTACTO": "Contacto",
   "HEADER_ADMIN": "Administración",
   "HEADER_BUTTON": "Iniciar Sesión",
+  "HEADER_BUTTON_SIGNOUT": "Iniciar Sesión",
+  "HEADER_BUTTON_SIGNIN": "Cerrar Sesión",
   "HEADER_BUTTON_OUT": "Cerrar Sesión",
   "HERO_SUBTITLE": "Tu mejora alternativa para el envío de Remesas en Latinoamérica",
 
@@ -193,7 +195,7 @@
     "BUTTONDELETE": "Eliminar",
     "BUTTONCANCEL": "Cancelar"
   },
-  
+
   "MODAL": {
     "TITLE": "Cálculo de Envíos",
     "TITLE2": "Cotización del Dólar",

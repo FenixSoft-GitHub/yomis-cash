@@ -1,0 +1,183 @@
+---
+import { supabase } from "@/lib/supabase";
+import Layout from "@/layouts/Layout.astro";
+import CloseIcon from "@/components/icons/Close.astro";
+
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+  const pais = data.get("country");
+  const moneda = data.get("currency");
+  const tasa = data.get("rate");
+  const simbolo = data.get("symbol");
+  const file = data.get("image");
+
+  let imageUrl = null;
+
+  // Subir la imagen a Supabase Storage si se proporciona
+  if (file && file instanceof File) {
+    const fileName = `${Date.now()}-${file.name}`;
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("country_images")
+      .upload(fileName, file);
+
+    if (uploadError) {
+      console.error("Error al subir la imagen:", uploadError);
+    } else {
+      const { data: urlData } = supabase.storage
+        .from("country_images")
+        .getPublicUrl(fileName);
+
+      imageUrl = urlData.publicUrl;
+    }
+  }
+
+  const { error } = await supabase.from("exchange_rates").insert([
+    {
+      country: pais,
+      currency: moneda,
+      rate: tasa,
+      symbol: simbolo,
+      image: imageUrl ? [imageUrl] : [],
+    },
+  ]);
+
+  if (!error) {
+    return Astro.redirect("/admin/tasasList/");
+  }
+}
+---
+
+<Layout title="Tasas de Cambio" description="">
+  <section
+    class="flex justify-center items-center bg-linear-to-t from-zinc-900 to-zinc-500"
+  >
+    <div class="container mx-auto mt-40 mb-5 max-w-3xl">
+      <!-- Botón de cerrar -->
+      <div
+        class="bg-gradient-to-t from-gray-400 to-gray-200 p-3 rounded-lg shadow-lg relative"
+      >
+        <a
+          href="/admin/tasasList"
+          class="absolute top-4 right-3 p-1 bg-gray-300 text-gray-600 hover:bg-red-600 hover:text-white rounded-full transition ease-in-out duration-300 block"
+          aria-label="Cerrar"
+        >
+          <CloseIcon class="w-4 h-4" />
+        </a>
+        <h1 class="text-2xl font-bold text-center text-gray-800">
+          Agregar Nuevo País
+        </h1>
+      </div>
+
+      <form
+        method="post"
+        enctype="multipart/form-data"
+        class="bg-gray-200 p-6 rounded-lg shadow-md mt-4"
+      >
+        <!-- GRID PARA DOS COLUMNAS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- País -->
+          <div>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-1"
+              for="country"
+            >
+              País:
+            </label>
+            <input
+              id="country"
+              name="country"
+              type="text"
+              placeholder="Ingrese el país"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+            />
+          </div>
+
+          <!-- Moneda -->
+          <div>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-1"
+              for="currency"
+            >
+              Moneda:
+            </label>
+            <input
+              id="currency"
+              name="currency"
+              type="text"
+              placeholder="Ingrese la moneda"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+            />
+          </div>
+
+          <!-- Tasa -->
+          <div>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-1"
+              for="rate"
+            >
+              Tasa:
+            </label>
+            <input
+              id="rate"
+              name="rate"
+              type="number"
+              step="any"
+              placeholder="Ingrese la tasa de cambio"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+            />
+          </div>
+
+          <!-- Símbolo -->
+          <div>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-1"
+              for="symbol"
+            >
+              Símbolo:
+            </label>
+            <input
+              id="symbol"
+              name="symbol"
+              type="text"
+              placeholder="Ingrese el símbolo de la moneda"
+              required
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+            />
+          </div>
+        </div>
+
+        <!-- Imagen (Ocupando toda la fila) -->
+        <div class="mt-4">
+          <label class="block text-gray-700 text-sm font-bold mb-1" for="image">
+            Imagen:
+          </label>
+          <input
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+            class="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg p-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <!-- Botón de envío -->
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-t from-blue-900 to-[rgba(52,216,251,1)] hover:scale-105 text-white font-bold py-2 px-4 mt-5 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+        >
+          Agregar
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<!-- ESTILOS PERSONALIZADOS -->
+<!-- <style>
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900;
+  }
+</style> -->

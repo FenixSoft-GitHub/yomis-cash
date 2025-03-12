@@ -1,4 +1,5 @@
 ---
+import { supabase } from "@/lib/supabase";
 import Close from "@/components/icons/Close.astro";
 import Link from "@/components/Link.astro";
 import { getI18N } from "@/i18n/index";
@@ -16,23 +17,18 @@ const translatePath = useTranslatedPath(lang);
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
-interface Exchange {
-  country: string;
-  rate: number;
-  symbol: string;
-  currency: string;
+let tasas = [];
+
+const { data, error } = await supabase
+  .from("exchange_rates")
+  .select("*")
+  .order("country", { ascending: true }); // Ordenar por nombre del país (ascendente);
+
+if (data) {
+  tasas = data;
+} else {
+  console.error("Error al obtener tasas:", error);
 }
-
-// const exchangeRates = await db.select().from(Exchange);
-interface Props {
-  exchangeRates: Exchange[];
-}
-
-const { exchangeRates } = Astro.props as Props;
-
-let amountToSend = 0;
-let amountToReceive = 0;
-// style="mask-image: linear-gradient(white 80%, transparent);"
 ---
 
 <div class="bg-gray-900 rounded-lg shadow-md mx-auto">
@@ -55,13 +51,12 @@ let amountToReceive = 0;
     <h2
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-semibold text-center"
     >
-      <Logo logoSize="6" />
+      <Logo logoSize={3} />
       {i18n.MODAL.TITLE}
     </h2>
   </div>
 
   <div class="py-2 px-4 text-gray-100 grid gap-4">
-    <!-- <div class="mb-4 grip"> -->
     <div class="flex gap-4 flex-col-2 items-center justify-between">
       <div class="w-full">
         <label for="originCountry" class="block font-medium">
@@ -72,7 +67,7 @@ let amountToReceive = 0;
           class="mt-1 block w-full px-2 py-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 sm:text-sm bg-gray-800"
         >
           {
-            exchangeRates.map((rate) => (
+            tasas.map((rate) => (
               <option value={rate.rate} data-symbol={rate.symbol}>
                 {rate.country}
               </option>
@@ -86,6 +81,7 @@ let amountToReceive = 0;
         </label>
         <input
           type="number"
+          step="any"
           inputmode="decimal"
           id="rateToCountry"
           class="mt-1 text-center block w-full px-3 py-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 sm:text-sm bg-gray-800"
@@ -127,16 +123,6 @@ let amountToReceive = 0;
     >
       {i18n.MODAL.BUTTONCONTACTUS}
     </Link>
-
-    <!-- <button
-      id="contacto"
-      type="button"
-      disabled={amountToSend <= 0}
-      aria-disabled={amountToSend <= 0}
-      class="bg-amber-400 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded w-full"
-    >
-      <a href="/contacto/">Contáctanos </a>
-    </button> -->
   </div>
 </div>
 
@@ -202,6 +188,7 @@ let amountToReceive = 0;
     }
   });
 
+  window.addEventListener("DOMContentLoaded", updateRateAndClearFields);
   rateToCountrySelect.addEventListener("change", updateRateAndClearFields);
   toSend.addEventListener("input", calculateAmountReceived);
 </script>
