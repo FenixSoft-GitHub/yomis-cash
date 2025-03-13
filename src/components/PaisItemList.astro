@@ -1,0 +1,56 @@
+---
+import EditIcon from "@/components/icons/EditIcon.astro";
+import DeleteIcon from "@/components/icons/DeleteIcon.astro";
+const { id, href, pais } = Astro.props;
+---
+
+<div
+  class="border border-gray-500 rounded-md p-4 grid-rows-2 justify-center items-center"
+>
+  <div
+    class="w-full h-[150px] rounded-md p-4 flex flex-col items-center mx-auto"
+  >
+    <a
+      id={id}
+      class="flex flex-col items-center w-[200px] h-[250px] mb-8"
+      href={href}
+    >
+      <img style="height: 7rem" class="object-fill" src={pais.image} alt="" />
+      <!-- Imagen fija en la parte superior -->
+    </a>
+  </div>
+  <!-- Contenedor de información en la segunda fila -->
+  <div class="flex justify-between items-center w-full mt-4">
+    <div>
+      <a
+        href={`/admin/editar/${pais.id}`}
+        class="bg-indigo-400/30 hover:bg-indigo-700 text-white/30 hover:text-white font-semibold p-1.5 rounded-full flex justify-center items-center w-fit"
+      >
+        <EditIcon class="size-5 inline-block" />
+      </a>
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <h1 class="texto text-center text-md font-semibold tracking-tight">
+        {pais.country}
+      </h1>
+      <p class="text-center text-sm text-gray-600">
+        {pais.rate}
+        {pais.symbol}
+      </p>
+    </div>
+    <div>
+      <a
+        href={`/admin/delete/${pais.id}`}
+        class="bg-red-500/30 hover:bg-red-600 text-white/30 hover:text-white font-semibold p-1.5 rounded-full flex justify-center items-center w-fit"
+      >
+        <DeleteIcon class="size-5 inline-block" />
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .texto {
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</div>

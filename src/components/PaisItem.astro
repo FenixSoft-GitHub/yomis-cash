@@ -1,73 +1,84 @@
 ---
-interface Props {
-	href: string;
-	imgSrc: string;
-	imgAlt: string;
-	pais: string;
-	id: string;
-}
-
-const { id, href, imgSrc, imgAlt, pais } = Astro.props;
+const { id, href, pais } = Astro.props;
 ---
 
-<a id={id} class="flex flex-col  lg:gap-5 items-center w-48 mb-8" href={href}>
-    <img  class="rounded-xl object-cover w-full h-auto duration-1000 ease-in-out hover:scale-110" src={imgSrc} alt={imgAlt}>
-    <h1 class="texto text-2xl md:text-3xl lg:text-3xl font-semibold tracking-tight hover:tracking-wide">{pais}</h1>
-</a>
+<div class="grid-rows-2 justify-center items-center">
+  <div class="w-[300px] h-[250px] p-2 flex flex-col items-center mx-auto">
+    <a id={id} class="flex flex-col lg:gap-12 items-center w-48" href={href}>
+      <img
+        style="height: 12rem"
+        class="rounded-xl object-fill duration-1000 ease-in-out hover:scale-110"
+        src={pais.image}
+        alt={`Bandera de ${pais.country}`}
+      />
+    </a>
+  </div>
+
+  <div id={id} class="mb-12">
+    <h1
+      class="texto text-gray-200 text-center text-lg lg:text-2xl font-semibold tracking-tight"
+    >
+      {pais.country}
+    </h1>
+    <p class="text-center text-sm text-gray-400">
+      Tasa 1 {pais.symbol} = {pais.rate} VES
+    </p>
+  </div>
+</div>
 
 <style>
-    .texto {
-        text-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
-    }
+  .texto {
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+  }
 
-    #theater,
-    #trophies-text h1,
-    #trophies-text p {
-        animation: cover-animation linear both;
-        animation-timeline: view();
+  #theater,
+  #trophies-text h1,
+  #trophies-text p {
+    animation: cover-animation linear both;
+    animation-timeline: view();
+  }
+  #theater-text h1,
+  #theater-text p,
+  #trophies {
+    animation: entry-animation linear both;
+    animation-timeline: view();
+  }
+  #theater {
+    animation-range: entry 10% cover 40%;
+  }
+  #theater-text h1 {
+    animation-range: entry 10% cover 30%;
+  }
+  #theater-text p {
+    animation-range: entry 10% cover 20%;
+  }
+  #trophies {
+    animation-range: entry 30% cover 50%;
+  }
+  #trophies-text h1 {
+    animation-range: entry 30% cover 40%;
+  }
+  #trophies-text p {
+    animation-range: entry 20% cover 30%;
+  }
+  @keyframes entry-animation {
+    0% {
+      opacity: 0;
+      translate: var(--entry-animation) 0;
     }
-    #theater-text h1,
-    #theater-text p,
-    #trophies {
-        animation: entry-animation linear both;
-        animation-timeline: view();
+    100% {
+      opacity: 1;
+      translate: 0 0;
     }
-    #theater {
-        animation-range: entry 10% cover 40%;
+  }
+  @keyframes cover-animation {
+    0% {
+      opacity: 0;
+      translate: var(--cover-animation) 0;
     }
-    #theater-text h1 {
-        animation-range: entry 10% cover 30%;
+    100% {
+      opacity: 1;
+      translate: 0 0;
     }
-    #theater-text p {
-        animation-range: entry 10% cover 20%;
-    }
-    #trophies {
-        animation-range: entry 30% cover 50%;
-    }
-    #trophies-text h1 {
-        animation-range: entry 30% cover 40%;
-    }
-    #trophies-text p {
-        animation-range: entry 20% cover 30%;
-    }
-    @keyframes entry-animation {
-        0% {
-        opacity: 0;
-        translate: var(--entry-animation) 0;
-        }
-        100% {
-        opacity: 1;
-        translate: 0 0;
-        }
-    }
-    @keyframes cover-animation {
-        0% {
-        opacity: 0;
-        translate: var(--cover-animation) 0;
-        }
-        100% {
-        opacity: 1;
-        translate: 0 0;
-        }
-    }
+  }
 </style>

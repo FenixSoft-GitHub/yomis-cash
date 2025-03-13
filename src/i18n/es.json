@@ -112,7 +112,7 @@
       "MEXICO": "México",
       "USA": "USA",
       "PERU": "Perú",
-      "DOMINICANA": "República Dominicana",
+      "ESPAÑA": "España",
       "VENEZUELA": "Venezuela"
     }
   },
@@ -174,9 +174,9 @@
   },
 
   "ADMIN": {
-    "TITLE": "Administración",
+    "TITLE": "Tasas de Cambio",
     "TITLE_2": "Yomi's Cash",
-    "SUBTITLE": "Mantenimiento de las Tasas por Países",
+    "SUBTITLE": "Tasas de Cambio por Países",
     "HEADER": {
       "ID": "ID",
       "COUNTRY": "País",

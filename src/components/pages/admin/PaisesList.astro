@@ -2,14 +2,22 @@
 import { supabase } from "@/lib/supabase";
 import Layout from "@/layouts/Layout.astro";
 import HeroContainer from "@/components/HeroContainer.astro";
-import PaisItem from "@/components/PaisItem.astro";
+import PaisItemList from "@/components/PaisItemList.astro";
+import { isAuthenticated } from "@/middleware/auth";
 import { getI18N } from "@/i18n/";
-import Logo from "../Logo.astro";
+import Logo from "@/components/Logo.astro";
+import AddIcon from "@/components/icons/AddIconDB.astro";
 import {
   getLangFromUrl,
   useTranslations,
   useTranslatedPath,
 } from "@/i18n/utils";
+
+const auth = await isAuthenticated(Astro, ["admin"]);
+
+if (auth) {
+  return auth;
+}
 
 let countrys = [];
 
@@ -33,10 +41,10 @@ const i18n = getI18N({ currentLocale });
 ---
 
 <Layout title="Países" description="Países">
-  <HeroContainer img="/Paises.webp">
+  <HeroContainer img="/Admin.webp">
     <span
       class="shadown text-center text-6xl lg:text-8xl tracking-widest text-wrap font-great"
-      >{i18n.COUNTRY.TITLE}</span
+      >{i18n.ADMIN.TITLE}</span
     >
   </HeroContainer>
 
@@ -49,31 +57,37 @@ const i18n = getI18N({ currentLocale });
       <h1
         class="text-6xl font-great text-center text-wrap mx-auto mb-4 tracking-wide"
       >
-        {i18n.COUNTRY.TITLE_2}
+        {i18n.ADMIN.TITLE_2}
       </h1>
       <h2
         class="text-2xl font-semibold text-center text-wrap mx-auto mb-4 tracking-wide"
       >
-        {i18n.COUNTRY.SUBTITLE}
+        {i18n.ADMIN.SUBTITLE}
       </h2>
-      <p
-        set:html={i18n.COUNTRY.CONTENT}
-        class="max-w-[800px] mx-auto mb-20 text-balance text-center text-sm tracking-wide md:text-xl"
-      />
     </section>
 
     <section
-      class="grid lg:justify-items-center place-items-center lg:grid-cols-2 grid-cols-1 gap-4 max-w-5xl mx-auto mt-20 mb-20"
+      class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-8 max-w-7xl my-8 mx-auto"
     >
       {
         countrys.map((country, index) => (
-          <PaisItem
-            id={index % 2 === 0 ? "trophies" : "theater"}
-            href={translatePath(`/enviar/${country.country}`)}
+          <PaisItemList
+            id=""
+            href={`/admin/editar/${country.id}`}
             pais={country}
           />
         ))
       }
     </section>
+    <div class="container mb-6 flex justify-end">
+      <!-- Botón para crear nueva tasa -->
+      <a
+        href="/admin/crearTasa"
+        class="bg-linear-to-t from-blue-900 to-[rgba(52,216,251,1)] hover:scale-110 text-white p-1 sm:py-1.5 sm:px-4 rounded-full flex w-fit"
+      >
+        <AddIcon class="size-5 sm:mr-5" />
+        <span class="hidden sm:block">País</span>
+      </a>
+    </div>
   </main>
 </Layout>

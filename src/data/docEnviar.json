@@ -200,13 +200,13 @@
     },
     {
       "pais": {
-        "nombre": "República Dominicana",
-        "bandera": "/mapas/dominican.webp",
-        "moneda": "Pesos Colombianos",
-        "continente": "América del Sur",
+        "nombre": "España",
+        "bandera": "/mapas/Espana.webp",
+        "moneda": "Euro",
+        "continente": "Europa",
         "banco": [
           {
-            "nombre": "Banco Dominicana",
+            "nombre": "Banco España",
             "logo": "/banks/Bancolombia.webp"
           },
           {

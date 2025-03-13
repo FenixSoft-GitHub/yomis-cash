@@ -15,11 +15,11 @@ const { data: tasa, error } = await supabase
 
 if (error) {
   console.error("Error al obtener la tasa:", error);
-  return Astro.redirect("/admin/tasasList"); // Redirigir en caso de error
+  return Astro.redirect("/admin/paisesList"); // Redirigir en caso de error
 }
 
 if (!tasa) {
-  return Astro.redirect("/admin/tasasList"); // Redirigir si la tasa no existe
+  return Astro.redirect("/admin/paisesList"); // Redirigir si la tasa no existe
 }
 
 if (Astro.request.method === "POST") {
@@ -28,7 +28,7 @@ if (Astro.request.method === "POST") {
   if (error) {
     console.error("Error al eliminar tasa:", error);
   } else {
-    return Astro.redirect("/admin/tasasList/");
+    return Astro.redirect("/admin/paisesList/");
   }
 }
 ---
@@ -56,7 +56,7 @@ if (Astro.request.method === "POST") {
           Eliminar
         </button>
         <a
-          href="/admin/tasasList/"
+          href="/admin/paisesList/"
           class="bg-linear-to-t from-blue-900 to-[rgba(52,216,251,1)] hover:scale-105 text-white py-2 px-4 rounded-full w-fit transition ease-in-out duration-300 flex justify-center items-center gap-3"
         >
           <CancelIcon class="w-5 h-5 inline-block" />

@@ -9,9 +9,6 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   const password = formData.get("password")?.toString();
 
   if (!email || !password) {
-    // return new Response("Correo electrónico y contraseña obligatorios", {
-    //   status: 400,
-    // });
     return redirect("/signin?error=missing_credentials");
   }
 
@@ -21,7 +18,6 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   });
 
   if (error) {
-    // return new Response(error.message, { status: 500 });
     return redirect(`/signin?error=${encodeURIComponent(error.message)}`);
   }
 

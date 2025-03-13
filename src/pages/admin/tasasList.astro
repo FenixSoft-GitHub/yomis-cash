@@ -48,7 +48,7 @@ if (data) {
 
     <!-- Contenedor de la tabla -->
     <div
-      class="container px-8 sm:px-15 mt-50 mx-auto overflow-x-auto text-white flex-1 flex flex-col z-40"
+      class="container px-8 sm:px-15 mt-35 mx-auto overflow-x-auto text-white flex-1 flex flex-col z-40"
     >
       <div class="flex justify-between my-2">
         <h1 class="shadown text-center text-3xl">Tasas de Cambio</h1>
@@ -56,7 +56,7 @@ if (data) {
 
       <!-- Tabla con scroll -->
       <div
-        class="overflow-y-auto max-h-[calc(100vh-30vh-9rem)] border border-gray-300 rounded-md scrollbar-custom"
+        class="overflow-y-auto max-h-[calc(100vh-24vh-9rem)] border border-gray-300 rounded-md scrollbar-custom"
       >
         <table class="min-w-full text-white rounded-lg">
           <thead class="bg-gray-900 text-white rounded-t-md sticky top-0">
@@ -115,15 +115,15 @@ if (data) {
                   <td class="px-6 py-1 whitespace-nowrap flex items-center justify-center gap-7">
                     <a
                       href={`/admin/editar/${tasa.id}`}
-                      class="bg-indigo-400 hover:bg-indigo-700 text-white font-semibold py-1 px-2 rounded flex justify-center items-center w-fit"
+                      class="bg-indigo-400 hover:bg-indigo-700 text-white font-semibold p-1.5 rounded-full flex justify-center items-center w-fit"
                     >
-                      <EditIcon class="size-6 inline-block" />
+                      <EditIcon class="size-5 inline-block" />
                     </a>
                     <a
                       href={`/admin/delete/${tasa.id}`}
-                      class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded flex justify-center items-center w-fit"
+                      class="bg-red-500/40 hover:bg-red-600 text-white font-semibold p-1.5  rounded-full flex justify-center items-center w-fit"
                     >
-                      <DeleteIcon class="size-6 inline-block" />
+                      <DeleteIcon class="size-5 inline-block" />
                     </a>
                   </td>
                 </tr>

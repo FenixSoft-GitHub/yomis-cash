@@ -16,14 +16,6 @@ const translatePath = useTranslatedPath(lang);
 const { currentLocale } = Astro;
 const i18n = getI18N({ currentLocale });
 
-interface Props {
-  pais: {
-    nombre: string;
-    bandera: string;
-    banco: { nombre: string; logo: string }[];
-  };
-}
-
 const { pais } = Astro.props;
 ---
 
@@ -37,15 +29,16 @@ const { pais } = Astro.props;
   <section
     class="text-xl text-left px-20 max-w-[90ch] text-pretty mx-auto my-24 mt-40"
   >
+    <Logo logoSize={4} />
     <div class="grid gap-4">
       <h1
         class="text-4xl font-semibold text-center text-wrap mx-auto tracking-wide"
       >
         {i18n.DATASEND.SUBTITLE}
-        {pais.nombre}
+        {pais.country}
       </h1>
       <div class="flex justify-center">
-        <img class="w-40" src={pais.bandera} alt="" />
+        <img class="w-40" src={pais.image} alt="" />
       </div>
     </div>
 
@@ -55,16 +48,16 @@ const { pais } = Astro.props;
       <div>
         <h2 class="mb-4 font-semibold text-3xl">
           {i18n.DATASEND.SECTION1.TITLE}
-          {pais.nombre}?
+          {pais.country}?
         </h2>
 
         <p>
           {i18n.DATASEND.SECTION1.CONTENT1}
-          {pais.nombre}
+          {pais.country}
           {i18n.DATASEND.SECTION1.CONTENT2}
         </p>
         <ul>
-          {
+          <!-- {
             pais.banco.map((banco) => (
               <li>
                 <div class="flex items-center">
@@ -77,11 +70,11 @@ const { pais } = Astro.props;
                 </div>
               </li>
             ))
-          }
+          } -->
         </ul>
         <p>
           {i18n.DATASEND.SECTION1.CONTENT3}
-          {pais.nombre}
+          {pais.country}
           {i18n.DATASEND.SECTION1.CONTENT4}
           <a href={translatePath("/contacto")} class="font-semibold"
             >{i18n.DATASEND.LINK1}</a
@@ -98,12 +91,12 @@ const { pais } = Astro.props;
       <div>
         <h2 class="mb-4 font-semibold text-3xl">
           {i18n.DATASEND.SECTION2.TITLE}
-          {pais.nombre}?
+          {pais.country}?
         </h2>
 
         <p>
           {i18n.DATASEND.SECTION2.CONTENT1}
-          {pais.nombre}
+          {pais.country}
           {i18n.DATASEND.SECTION2.CONTENT2}
           <a href={translatePath("/contacto")} class="font-semibold"
             >{i18n.DATASEND.LINK3}</a
@@ -111,23 +104,23 @@ const { pais } = Astro.props;
           {i18n.DATASEND.SECTION2.CONTENT3}
           <span>
             {i18n.DATASEND.SECTION2.CONTENT4}
-            {pais.nombre}
+            {pais.country}
             {i18n.DATASEND.SECTION2.CONTENT5}
           </span>
         </p>
       </div>
 
       {
-        pais.nombre !== "Venezuela" && (
+        pais.country !== "Venezuela" && (
           <div>
             <h2 class="mb-4 font-semibold text-3xl">
-              {i18n.DATASEND.SECTION3.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION3.TITLE} {pais.country}{" "}
               {i18n.DATASEND.SECTION3.TITLE2}
             </h2>
 
             <p>
-              {i18n.DATASEND.SECTION3.CONTENT1} {pais.nombre}
-              {i18n.DATASEND.SECTION3.CONTENT2} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION3.CONTENT1} {pais.country}
+              {i18n.DATASEND.SECTION3.CONTENT2} {pais.country}{" "}
               {i18n.DATASEND.SECTION3.CONTENT3}
               <span>
                 {i18n.DATASEND.SECTION3.CONTENT4}
@@ -142,17 +135,17 @@ const { pais } = Astro.props;
       }
 
       {
-        pais.nombre !== "Colombia" && (
+        pais.country !== "Colombia" && (
           <div>
             <h2 class="mb-4 font-semibold text-3xl">
-              {i18n.DATASEND.SECTION4.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION4.TITLE} {pais.country}{" "}
               {i18n.DATASEND.SECTION4.TITLE2}
             </h2>
 
             <p>
-              {i18n.DATASEND.SECTION4.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION4.CONTENT1} {pais.country}{" "}
               {i18n.DATASEND.SECTION4.CONTENT2}
-              {pais.nombre} {i18n.DATASEND.SECTION4.CONTENT3}
+              {pais.country} {i18n.DATASEND.SECTION4.CONTENT3}
               <span>
                 {i18n.DATASEND.SECTION4.CONTENT4}
                 <a href={translatePath("/contacto")} class="font-semibold">
@@ -166,17 +159,17 @@ const { pais } = Astro.props;
       }
 
       {
-        pais.nombre !== "Chile" && (
+        pais.country !== "Chile" && (
           <div>
             <h2 class="mb-4 font-semibold text-3xl">
-              {i18n.DATASEND.SECTION5.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION5.TITLE} {pais.country}{" "}
               {i18n.DATASEND.SECTION5.TITLE2}
             </h2>
 
             <p>
-              {i18n.DATASEND.SECTION5.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION5.CONTENT1} {pais.country}{" "}
               {i18n.DATASEND.SECTION5.CONTENT2}
-              {pais.nombre} {i18n.DATASEND.SECTION5.CONTENT3}
+              {pais.country} {i18n.DATASEND.SECTION5.CONTENT3}
               <span>
                 {i18n.DATASEND.SECTION5.CONTENT4}
                 <a href={translatePath("/contacto")} class="font-semibold">
@@ -190,16 +183,16 @@ const { pais } = Astro.props;
       }
 
       {
-        pais.nombre !== "Estados Unidos" && (
+        pais.country !== "Estados Unidos" && (
           <div>
             <h2 class="mb-4 font-semibold text-3xl">
-              {i18n.DATASEND.SECTION6.TITLE} {pais.nombre}?
+              {i18n.DATASEND.SECTION6.TITLE} {pais.country}?
             </h2>
 
             <p>
-              {i18n.DATASEND.SECTION6.CONTENT1} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION6.CONTENT1} {pais.country}{" "}
               {i18n.DATASEND.SECTION6.CONTENT2}
-              {pais.nombre} {i18n.DATASEND.SECTION6.CONTENT3}
+              {pais.country} {i18n.DATASEND.SECTION6.CONTENT3}
               <span>
                 {i18n.DATASEND.SECTION6.CONTENT4}
                 <a href={translatePath("/contacto")} class="font-semibold">
@@ -213,16 +206,16 @@ const { pais } = Astro.props;
       }
 
       {
-        pais.nombre !== "España" && (
+        pais.country !== "España" && (
           <div>
             <h2 class="mb-4 font-semibold text-3xl">
-              {i18n.DATASEND.SECTION7.TITLE} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION7.TITLE} {pais.country}{" "}
               {i18n.DATASEND.SECTION7.TITLE2}
             </h2>
 
             <p>
-              {i18n.DATASEND.SECTION7.CONTENT1} {pais.nombre}{" "}
-              {i18n.DATASEND.SECTION7.CONTENT2} {pais.nombre}{" "}
+              {i18n.DATASEND.SECTION7.CONTENT1} {pais.country}{" "}
+              {i18n.DATASEND.SECTION7.CONTENT2} {pais.country}{" "}
               {i18n.DATASEND.SECTION7.CONTENT3}
               <span>
                 {i18n.DATASEND.SECTION7.CONTENT4}
