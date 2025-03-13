@@ -2,16 +2,15 @@
 import { defineConfig } from 'astro/config';
 import path from 'path';
 
-import db from '@astrojs/db';
-
 import tailwindcss from '@tailwindcss/vite';
 
 import preact from '@astrojs/preact';
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [db(), preact()],
-
+  integrations: [preact()],
   output: "server",
 
   i18n: {
@@ -30,4 +29,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: vercel(),
 });
